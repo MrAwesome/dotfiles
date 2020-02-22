@@ -1,0 +1,258 @@
+set nocompatible
+set hlsearch
+set autoindent
+set history=1000
+set ruler
+set showcmd
+set encoding=utf-8
+set nostartofline
+set laststatus=2
+hi StatusLine term=reverse ctermfg=2 ctermbg=white gui=bold,reverse
+hi StatusLineNC term=reverse ctermfg=black ctermbg=darkyellow cterm=none
+set statusline=%F%m%r%h%w\ %=[C%v,L%l/%L]
+colorscheme darkblue
+
+
+" Disable syntax highlighting for lines that are too long (much faster)
+set synmaxcol=2048
+" Do not redraw when running macros (much faster)
+set lazyredraw
+" Timeout for macros
+set timeoutlen=500
+
+"Enable syntax highlighting
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
+
+"Fix .sh indentation
+augroup sh
+    au!
+    au FileType sh set nosmartindent autoindent
+augroup END
+
+"Fix .sh syntax highlighting
+let g:is_posix = 1
+
+"Use four spaces instead of a tab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set shiftround
+set nojoinspaces
+
+"Increase number of allowed tabs for multiple file viewing
+set tabpagemax=32
+
+" Don't auto-wrap to 80 characters
+set tw=0
+
+"Map Y to to yank until EOL, rather than act as yy
+map Y y$
+
+"Make quickfix window work well
+set switchbuf+=usetab,newtab
+
+
+"Manage multiple buffers better
+set hidden
+
+"Makes % key more useful
+runtime macros/matchit.vim
+
+"Bash-style tab completion, with the ability to tab to complete it
+
+"set wildmenu
+"set wildmode=list:longest,full
+"set wildmode=list:longest
+set wildchar=<Tab> wildmenu wildmode=full
+set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.o,*.obj,*.bak,*.exe,*~
+set wildcharm=<C-Z>
+nnoremap <F11> :b <C-Z>
+
+
+"Case-smart searching
+set ignorecase
+set smartcase
+
+" Minimal number of lines to scroll when the cursor gets of the screen
+set scrolloff=6
+
+"Mouse support
+set mouse=a
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
+
+"Highlight terms incrementally as they're searched
+set incsearch
+
+"Makes <CR> unhighlight searches
+nnoremap <CR> :nohlsearch<CR>/<BS><CR>
+
+" ` is better than ' so swap them
+nnoremap ' `
+nnoremap ` '
+
+"Making , the leader key
+let mapleader=","
+
+"Can toggle visible tabs and trailing spaces with ,P
+set listchars=tab:>-,trail:·,eol:$
+nmap <silent> <leader>P :set nolist!<CR>
+
+"Allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+"Perry's magic line arithmetic
+nnoremap \b !!bc<cr>==
+
+" 'Stamp' a word with a replacement word
+nnoremap S diw"0P
+
+"Custom keybindings
+nmap gr gT
+nmap <Leader>, <ESC>:w
+imap <Leader>a 
+nmap <Leader>b :b <C-Z>
+nmap <C-t> :b 
+nmap <Leader>< <ESC>:wall
+vmap <Leader>c :s/^/\/\//
+nmap <Leader>k <ESC>:!./%
+nmap <Leader>K <ESC>:!./% > /tmp/tmpfile.out; less /tmp/tmpfile.out
+nmap <Leader>x :!chmod +x %
+nmap <Leader>X O# XXX DONOTCOMMIT XXX<ESC>
+nmap <Leader>w <C-W><C-W>
+nmap <Leader>m :ll
+nmap <Leader>z :lcl
+nmap <Leader>v :tabedit ~/.vim/general.vim
+nmap <Leader>V :source ~/.vimrc
+nmap <Leader>M :tabedit ~/misc/macros.txt
+nmap <Leader>g "gyiw<ESC>:!ack g
+nmap <Leader>G "hyiw<ESC>:!ack h
+nmap <Leader>/ :tabdo /
+nmap <Leader>? "ryiw<ESC>:tabdo /r
+nmap <Leader>T :execute EditWWWTestFile()
+nmap <Leader>q @w
+
+function! EditWWWTestFile()
+    let fname = systemlist("~/bin/get_www_test_file_name.sh ".bufname("%"))[0]
+    execute "vsplit ".fname
+endfunction
+
+function! GetPhabLink()
+    let linkname = systemlist("~/bin/get_phabricator_link.sh ".bufname("%"))[0]
+    return linkname
+endfunction
+
+function! PrintPhabLink()
+   let linkname = GetPhabLink()
+   let fulllink = linkname . "$" . line(".")
+   echo fulllink
+endfunction
+
+function! PrintPhabLinkV() range
+   let linkname = GetPhabLink()
+   let fulllink = linkname . "$" . line("'<") . "-" . line("'>")
+   echo fulllink
+endfunction
+
+nmap <Leader>p :call PrintPhabLink()
+vmap <Leader>p :call PrintPhabLinkV()
+
+function! GetPasteLink() range
+    let fname = bufname("%")
+    silent '<,'> w! /tmp/LOOOOOOL
+    echo system("echo -n $(cat /tmp/LOOOOOOL | arc paste --title $(basename ".fname.") 2>/dev/null | grep phabricator | awk -F': ' '{print $1}')")
+    
+endfunction
+
+vmap <Leader>P :call GetPasteLink()
+
+
+" TODO: add a function which stores the last-visited tab in a variable, moves
+" to that
+
+" Go to last active tab
+"
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <Leader>f :exe "tabn ".g:lasttab<cr>
+"vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+nmap <Leader>1 :tabn 1
+nmap <Leader>2 :tabn 2
+nmap <Leader>3 :tabn 3
+nmap <Leader>4 :tabn 4
+nmap <Leader>5 :tabn 5
+nmap <Leader>6 :tabn 6
+nmap <Leader>7 :tabn 7
+nmap <Leader>8 :tabn 8
+nmap <Leader>9 :tabn 9
+nmap <Leader>0 :tabn 10
+
+" (other bindings in plugins.vim)
+
+"nmap <Leader>l :autocmd FileType python match OverLength /\%81v.*/:set filetype=python
+
+nmap gw <C-W><C-W>
+nmap <F2> <ESC>:w
+imap <F2> <ESC>:wa
+
+nmap <F3> <ESC>:s/^\(.\)/#\1/:noh<ESC>
+nmap [25~ <ESC>:s/^\(.\)/\/\/\1/:noh<ESC>
+vmap <F3> :s/^\(.\)/#\1/:noh
+vmap [25~ :s/^\(.\)/\/\/\1/:noh
+
+nmap <F7> :set invspell<ESC>
+nmap <F8> 1z=
+
+set pastetoggle=<F10>
+
+nmap <up> gk
+nmap <down> gj
+
+inoremap <Nul> <C-x><C-o>
+
+" Create Blank Newlines and stay in Normal mode
+nnoremap <silent> zj o<ESC>cc<ESC>
+nnoremap <silent> zk O<ESC>cc<ESC>
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+map N Nzz
+map n nzz
+
+" Make tabs show up red
+syn match tab display "\t"
+hi link tab Error
+
+""""""" FB-specific """"""""
+
+" Highlight text past 80 chars
+" highlight OverLength ctermbg=lightgrey
+" match OverLength /\%81v.*/
+
+" Use pathogen
+execute pathogen#infect()
+
+"sacrilege?
+" nnoremap : ;
+nnoremap ; ;
+noremap ; :
+
+" Replace word with paste buffer
+nnoremap S diw"0P
+
+" Search in all currently opened buffers
+function! ClearQuickfixList()
+  call setqflist([])
+endfunction
+function! Vimgrepall(pattern)
+  call ClearQuickfixList()
+  exe 'bufdo vimgrepadd ' . a:pattern . ' %'
+  cnext
+endfunction
+command! -nargs=1 Vgrep call Vimgrepall(<f-args>)
