@@ -1,2 +1,3 @@
-vim/plugged/*
-vim/view/*
+vim/.vim/plugged/*
+vim/.vim/*view/*
+zsh/.zsh/.zcompdump*

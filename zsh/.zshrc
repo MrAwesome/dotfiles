@@ -28,5 +28,3 @@ alias bounce_interface='sudo ifconfig wlp3s0 down; sudo ifconfig wlp3s0 up'
 alias fb='fbterm -s 18 --font-names="Source Code Variable"'
 alias fbt='fbterm -s 18 --font-names="xos4 Terminus"'
 
-#echo "get fuzzyfinder / sushrc / aliases"
-echo "set up weechat"
