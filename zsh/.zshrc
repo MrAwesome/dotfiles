@@ -1,5 +1,6 @@
 HOMEDIR="/home/$USER"
 ZDOTDIR="${HOMEDIR}/.zsh"
+PATH="${PATH}:${HOMEDIR}/.local/bin"
 
 # FB master.zshrc
 source "${HOMEDIR}/.zsh/master.zsh"
