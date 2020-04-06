@@ -1,4 +1,4 @@
-nmap <Leader>m :make check<CR><CR><CR>
+nmap <Leader>m :make check --all-targets<CR><CR><CR>
 nmap <Leader>M :!reset && cargo test<CR>
 nmap <Leader>r :!reset && RUST_BACKTRACE=1 cargo run<CR>
 nmap <Leader>c <ESC>:make clippy --all-targets -- -D clippy::pedantic<CR>
@@ -12,6 +12,7 @@ nmap <Leader>t :vert botright term ++cols=40<CR>
 
 " vimgrep on all buffers
 nmap <Leader>g :vimgrep // ##ODODODOD
+nmap [1;2S :vimgrep // ##ODODODOD
 " vimgrep current token on all buffers
 nmap <Leader>G yiw/"N:vimgrep /\<"\>/ ##<CR>
 nmap  :cn<CR>
