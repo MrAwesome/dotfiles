@@ -25,4 +25,3 @@ map <Leader>D O#[derive(Debug)]<ESC>
 imap { {<ESC>o}<ESC>kAk<ESC>==$"_xA
 imap ( (<ESC>o);<ESC>kAk<ESC>==$"_xA
 imap [ [<ESC>o];<ESC>kAk<ESC>==$"_xA
-
