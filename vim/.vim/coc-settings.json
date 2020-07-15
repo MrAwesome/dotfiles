@@ -1,9 +1,20 @@
-{ 
+{
     "languageserver": {
         "ccls": {
             "command": "ccls",
-            "filetypes": ["c", "cpp", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
@@ -15,5 +26,17 @@
     "python.linting.mypyEnabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+
+    "diagnostic.virtualText": false,
+    "diagnostic.joinMessageLines": true,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.messageTarget": "float",
+    "diagnostic.level": "information",
+    "suggest.autoTrigger": "none",
+    "signature.enable": false,
+    "coc.preferences.snippets.enable": false,
+
+    "rust-analyzer.diagnostics.enable": false,
+    "rust-analyzer.serverPath": "/home/glenn/bin/rust-analyzer-wrapper"
 }
