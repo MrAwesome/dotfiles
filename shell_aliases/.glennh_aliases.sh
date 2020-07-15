@@ -8,7 +8,7 @@ alias val="vim ~/.glennh_aliases.sh && source ~/.glennh_aliases.sh"
 
 # "vim all changed"
 #alias vac=$'vim $(git diff-tree --no-commit-id --name-only -r HEAD && git status -s | awk \'{print $2}\')'
-alias vac='git status 1>/dev/null && vim $(git status -u -s | sed "s/^...//")'
+alias vac='git status 1>/dev/null && vim $(git status -u -s | shuf | sed "s/^...//")'
 
 hgrep () { rg $* $HISTFILE }
 
