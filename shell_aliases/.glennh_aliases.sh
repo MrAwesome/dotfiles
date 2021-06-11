@@ -92,7 +92,8 @@ alias cdr='cd ~/ruwi'
 vimchataigi () {
     setopt nullglob
     cd ~/ChhaTaigi/ &&
-    vim src/{ChhaTaigi.tsx,{{,*/}*.css,*.js,*.ts,*.tsx}} \
+    vim src/ChhaTaigi.tsx \
+    $(find src/ | rg '\.(tsx|ts|js|cjs|css)$') \
     public/{index.html,manifest.json} \
     {tsconfig.json,tsconfig.server.json,package.json,webpack.server.js} \
     $*
