@@ -22,14 +22,13 @@
             }
         }
     },
-    "python.jediEnabled": false,
-    "python.linting.mypyEnabled": true,
-    "python.linting.pylintEnabled": true,
+    "BLEHpython.jediEnabled": false,
+    "BLEHpython.linting.mypyEnabled": false,
+    "BLEHpython.linting.pylintEnabled": false,
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
 
     "diagnostic.virtualText": false,
-    "diagnostic.joinMessageLines": true,
     "diagnostic.checkCurrentLine": true,
     "diagnostic.messageTarget": "float",
     "diagnostic.level": "information",
@@ -37,6 +36,8 @@
     "signature.enable": false,
     "coc.preferences.snippets.enable": false,
 
-    "rust-analyzer.diagnostics.enable": false,
-    "rust-analyzer.serverPath": "/home/glenn/bin/rust-analyzer-wrapper"
+    "BLEHrust-analyzer.diagnostics.enable": false,
+    "BLEHrust-analyzer.server.path": "/home/glenn/bin/rust-analyzer-wrapper",
+    "BLEHrust-analyzer.cargo.target": "mipsel-sony-psp",
+    "python.linting.banditEnabled": true
 }

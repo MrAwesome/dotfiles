@@ -1,6 +1,6 @@
 export PATH="$PATH:$HOME/.cargo/bin"
 
-export CONSOLE_BROWSER=elinks 
+export CONSOLE_BROWSER=elinks
 
 # Convenience functions for editing configs quickly
 alias vimvim='vim ~/.vim/plugins.vim ~/.vimrc ~/.vim/*.vim'
@@ -9,29 +9,31 @@ alias val="vim ~/.glennh_aliases.sh && source ~/.glennh_aliases.sh"
 # "vim all changed"
 #alias vac=$'vim $(git diff-tree --no-commit-id --name-only -r HEAD && git status -s | awk \'{print $2}\')'
 
-repocommand () {
-    if git rev-parse --is-inside-work-tree 1>/dev/null; then
-        pushd $(git rev-parse --show-toplevel) &>/dev/null
-        $1
-        popd &>/dev/null
-    fi
-}
+#repocommand () {
+#    if git rev-parse --is-inside-work-tree 1>/dev/null; then
+#        cmd=$1
+#        pushd $(git rev-parse --show-toplevel) &>/dev/null
+#        shift 1
+#        $cmd $*
+#        popd &>/dev/null
+#    fi
+#}
 
 gac () {
-    repocommand gac_inner | sort | uniq
+    gac_inner $* | sort | uniq
 }
 
 gac_inner () {
-    git diff-tree --no-commit-id --name-only -r HEAD 
+    PREFIX="$(git rev-parse --show-toplevel)/"
+    git diff-tree --no-commit-id --name-only -r HEAD | awk '{ print "'"$PREFIX"'" $1 }'
     git status -u -s | sed "s/^...//"
+    for f in $*; do
+        echo "$f"
+    done
 }
 
 vac () {
-    repocommand vac_inner
-}
-
-vac_inner () {
-    vim $(gac | shuf)
+    vim $(gac $* | shuf)
 }
 
 hgrep () { rg $* $HISTFILE }
@@ -66,8 +68,8 @@ ddg() {
 gcommit () { git add -A && git commit -m "$1" }
 gpush () { git add -A && git commit -m "$1" && git push }
 
-cdrust () { cd ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src }
-cdrustcargo () { cd ~/.cargo/registry/src/github.com-*/ }
+cdrust () { cd ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/ }
+cdrustcargo () { echo 'USING 1ecc RUST CHECKOUT'; cd ~/.cargo/registry/src/github.com-1ecc6299db9ec823/ }
 
 rustcargosearch () { cdrustcargo && find . | rg '\.rs$' | xargs rg $* }
 rustsearch () { cdrust && find . | rg '\.rs$' | xargs rg $* }
@@ -75,20 +77,47 @@ alias rcs='rustcargosearch '
 alias rs='rustsearch '
 
 vimruwi () { cd ~/ruwi && vim $(find src/ tests/ | rg '\.rs$' | shuf) Cargo.toml }
-installruwi () { 
+installruwi () {
     sudo -v &&
-    cd ~/ruwi && 
-    cargo test --release && 
-    cargo build --release && 
+    cd ~/ruwi &&
+    cargo test --release &&
+    cargo build --release &&
     sudo cp ./target/release/ruwi /usr/local/bin  &&
     echo '[DONE] Installed ruwi!'
 }
 
 alias vr=vimruwi
 alias cdr='cd ~/ruwi'
+
+vimchataigi () {
+    setopt nullglob
+    cd ~/ChhaTaigi/ &&
+    vim src/{ChhaTaigi.tsx,{{,*/}*.css,*.js,*.ts,*.tsx}} \
+    public/{index.html,manifest.json} \
+    {tsconfig.json,tsconfig.server.json,package.json,webpack.server.js} \
+    $*
+}
+alias vt=vimchataigi
+
 alias rc='sudo loadkeys <<< "keycode 58 = Escape"'
-alias rw='sudo ruwi -s fzf'
 alias tm='tmux attach || tmux'
+
+jcat() {
+    cat "$1" | jq
+}
+
+jless() {
+    jcat "$1" | less
+}
+
+cjcat() {
+    csvtojson "$1" | jq
+}
+
+cjless() {
+    cjcat "$1" | less
+}
+
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh

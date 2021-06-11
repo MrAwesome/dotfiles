@@ -1,6 +1,7 @@
 nmap <Leader>m :make check --all-targets<CR><CR><CR>
 nmap <Leader>M :!reset && cargo test<CR>
 nmap <Leader>r :!reset && RUST_BACKTRACE=1 cargo run<CR>
+nmap <Leader>R :!reset && RUST_BACKTRACE=1 cargo run --release<CR>
 nmap <Leader>c <ESC>:make clippy --all-targets -- -D clippy::pedantic<CR>
 nmap <Leader>C <ESC>:!reset && cargo clippy --all-targets -- -D clippy::pedantic<CR>
 nmap <Leader>d yiwodbg!(&<ESC>pA);<ESC><CR>
@@ -26,3 +27,11 @@ map <Leader>D O#[derive(Debug)]<ESC>
 imap { {<ESC>o}<ESC>kAk<ESC>==$"_xA
 imap ( (<ESC>o);<ESC>kAk<ESC>==$"_xA
 imap [ [<ESC>o];<ESC>kAk<ESC>==$"_xA
+
+func! MyFilt(cmd)
+    let parts = split(a:cmd, '|')
+    let vimcmd = trim(parts[0])
+    let shcmd = trim(parts[1])
+    echom trim(system(shcmd, execute(vimcmd)))
+endfunc
+:command -nargs=1 MyFilt call MyFilt(<f-args>)
