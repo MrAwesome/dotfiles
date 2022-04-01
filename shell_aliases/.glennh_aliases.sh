@@ -5,6 +5,8 @@ export CONSOLE_BROWSER=elinks
 # Convenience functions for editing configs quickly
 alias vimvim='vim ~/.vim/plugins.vim ~/.vimrc ~/.vim/*.vim'
 alias val="vim ~/.glennh_aliases.sh && source ~/.glennh_aliases.sh"
+alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
+
 
 # "vim all changed"
 #alias vac=$'vim $(git diff-tree --no-commit-id --name-only -r HEAD && git status -s | awk \'{print $2}\')'
@@ -25,8 +27,9 @@ gac () {
 
 gac_inner () {
     PREFIX="$(git rev-parse --show-toplevel)/"
-    git diff-tree --no-commit-id --name-only -r HEAD | awk '{ print "'"$PREFIX"'" $1 }'
-    git status -u -s | sed "s/^...//"
+    git status -u --porcelain=v1 | sed 's/^...//' | awk '{ print "'"$PREFIX"'" $1 }'
+    #git diff-tree --no-commit-id --name-only -r HEAD | awk '{ print "'"$PREFIX"'" $1 }'
+    #git status -u -s | sed "s/^...//"
     for f in $*; do
         echo "$f"
     done
@@ -36,7 +39,9 @@ vac () {
     vim $(gac $* | shuf)
 }
 
-hgrep () { rg $* $HISTFILE }
+hgrep () {
+    rg $* $HISTFILE
+}
 
 booknew() {
     cd ~/Dropbox/rust/rust_book_work
@@ -65,18 +70,33 @@ ddg() {
   $CONSOLE_BROWSER "${PREFIX}${SEARCH_STRING}"
 }
 
-gcommit () { git add -A && git commit -m "$1" }
-gpush () { git add -A && git commit -m "$1" && git push }
+gcommit () {
+    git add -A && git commit -m "$1"
+}
+gpush () {
+    git add -A && git commit -m "$1" && git push
+}
 
-cdrust () { cd ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/ }
-cdrustcargo () { echo 'USING 1ecc RUST CHECKOUT'; cd ~/.cargo/registry/src/github.com-1ecc6299db9ec823/ }
+cdrust () {
+    cd ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/
+}
+cdrustcargo () {
+    echo 'USING 1ecc RUST CHECKOUT'
+    cd ~/.cargo/registry/src/github.com-1ecc6299db9ec823/
+}
 
-rustcargosearch () { cdrustcargo && find . | rg '\.rs$' | xargs rg $* }
-rustsearch () { cdrust && find . | rg '\.rs$' | xargs rg $* }
+rustcargosearch () {
+    cdrustcargo && find . | rg '\.rs$' | xargs rg $*
+}
+rustsearch () {
+    cdrust && find . | rg '\.rs$' | xargs rg $*
+}
 alias rcs='rustcargosearch '
 alias rs='rustsearch '
 
-vimruwi () { cd ~/ruwi && vim $(find src/ tests/ | rg '\.rs$' | shuf) Cargo.toml }
+vimruwi () {
+    cd ~/ruwi && vim $(find src/ tests/ | rg '\.rs$' | shuf) Cargo.toml
+}
 installruwi () {
     sudo -v &&
     cd ~/ruwi &&
@@ -89,19 +109,35 @@ installruwi () {
 alias vr=vimruwi
 alias cdr='cd ~/ruwi'
 
-vimchataigi () {
+alias ct='cd ~/Liburry'
+lintaigi() {
     setopt nullglob
-    cd ~/ChhaTaigi/ &&
-    vim src/ChhaTaigi.tsx \
-    $(find src/ | rg '\.(tsx|ts|js|cjs|css)$') \
-    public/{index.html,manifest.json} \
-    {tsconfig.json,tsconfig.server.json,package.json,webpack.server.js} \
+    ct &&
+    yarn run eslint $(find src/ | rg '\.(tsx|ts|js|cjs|mjs)$')
+}
+
+vimchhataigi() {
+    setopt nullglob
+    ct &&
+    vim src/client/ChhaTaigi.tsx \
+    $(find src/ | rg -v 'src/generated' | rg '\.(tsx|ts|js|cjs|mjs|css|yml)$') \
+    public/{index.html,site.webmanifest} \
+    {tsconfig.json,tsconfig.scripts.json,package.json,*.js} \
+    README.md \
     $*
 }
-alias vt=vimchataigi
+alias vt=vimchhataigi
+alias st='ct; BROWSER=none HTTPS=true yarn start'
+alias tt='ct; CI=true yarn test --color --no-watch'
+
+alias deploytaigi='tt && (ct; export REACT_APP_LIBURRY_BUILD="chhataigi"; yarn build) && echo y | gcloud app deploy --project chhataigi'
 
 alias rc='sudo loadkeys <<< "keycode 58 = Escape"'
 alias tm='tmux attach || tmux'
+
+alias wgup="sudo wg-quick up wg0"
+alias wgdown="sudo wg-quick down wg0"
+alias wged="wgdown; sudo vim /etc/wireguard/wg0.conf; wgup"
 
 jcat() {
     cat "$1" | jq
@@ -119,6 +155,7 @@ cjless() {
     cjcat "$1" | less
 }
 
-
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+if [ -n "$ZSH_VERSION" ]; then
+    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/completion.zsh
+fi

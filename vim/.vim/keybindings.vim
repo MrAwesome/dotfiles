@@ -12,10 +12,10 @@ nmap <Leader>> <Leader>be
 nmap <Leader>t :vert botright term ++cols=40<CR>
 
 " vimgrep on all buffers
-nmap <Leader>g :vimgrep // ##ODODODOD
-nmap [1;2S :vimgrep // ##ODODODOD
+nmap <Leader>g :vimgrep /\C/ ##ODODODOD
+nmap [1;2S :vimgrep /\C/ ##ODODODOD
 " vimgrep current token on all buffers
-nmap <Leader>G yiw/"N:vimgrep /\<"\>/ ##<CR>
+nmap <Leader>G yiw/"N:vimgrep /\<"\>\C/ ##<CR>
 nmap  :cn<CR>
 nmap  :cp<CR>
 

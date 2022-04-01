@@ -39,5 +39,6 @@
     "BLEHrust-analyzer.diagnostics.enable": false,
     "BLEHrust-analyzer.server.path": "/home/glenn/bin/rust-analyzer-wrapper",
     "BLEHrust-analyzer.cargo.target": "mipsel-sony-psp",
-    "python.linting.banditEnabled": true
+    "python.linting.banditEnabled": true,
+    "eslint.packageManager": "yarn"
 }
