@@ -159,3 +159,8 @@ if [ -n "$ZSH_VERSION" ]; then
     source /usr/share/fzf/key-bindings.zsh
     source /usr/share/fzf/completion.zsh
 fi
+
+jsontocsv() {
+    #                                                    vvv !!! hack !!! vvvvvvvvvvvvvvvvvvvvvv  
+    jq -r '(map(keys) | add | unique) as $cols | map(. | select(.optionDeliverablesList == null) as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv' "$1"
+}
