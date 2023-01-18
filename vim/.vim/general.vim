@@ -196,3 +196,9 @@ nnoremap S diw"0P
 " Command line bindings
 cmap  <Home>
 cmap  <End>
+
+" Enable mouse and fix paste in alacritty
+if $TERM == 'alacritty'
+  set ttymouse=sgr
+  set t_BE=
+endif

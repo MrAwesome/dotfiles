@@ -164,3 +164,12 @@ jsontocsv() {
     #                                                    vvv !!! hack !!! vvvvvvvvvvvvvvvvvvvvvv  
     jq -r '(map(keys) | add | unique) as $cols | map(. | select(.optionDeliverablesList == null) as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv' "$1"
 }
+
+filesize() {
+    if [[ "$*" == "" ]]; then
+        du -sh * | rg '^[0-9\.]+G'
+    else
+        du -sh $* | rg '^[0-9\.]+G'
+    fi
+}
+alias fs=filesize

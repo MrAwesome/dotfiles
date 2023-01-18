@@ -11,6 +11,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nanotech/jellybeans.vim'
 Plug 'noah/vim256-color'
 Plug 'junegunn/fzf.vim'
+Plug 'github/copilot.vim'
 Plug '/usr/bin/fzf'
 call plug#end()
 
@@ -27,7 +28,10 @@ colorscheme heroku-terminal
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 "
 " Original COC bindings, see bottom for snippet bindings
-inoremap <silent><expr> <TAB>
+"
+" inoremap <silent><expr> <TAB>
+"inoremap <silent><expr> <TAB>
+inoremap <silent><expr> <c-q>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
@@ -39,7 +43,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -176,3 +180,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 
 command! -nargs=0 Tsc :call CocAction('runCommand', 'tsserver.watchBuild')
+
+" map <c-\> to show copilot suggestions
+map <c-\> <Plug>(coc-copilot-expand)
