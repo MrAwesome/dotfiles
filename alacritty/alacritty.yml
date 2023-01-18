@@ -549,7 +549,10 @@ mouse_bindings:
 #  - { mouse: Right,                 action: ExpandSelection }
 #  - { mouse: Right,  mods: Control, action: ExpandSelection }
 #  - { mouse: Middle, mode: ~Vi,     action: PasteSelection  }
-  - { mouse: Middle, mods: Shift,   action: PasteSelection  }
+#
+#  NOTE: Seems to double-detect these:
+#- { mouse: Middle, mods: Shift,   action: PasteSelection  }
+  - { mouse: Middle,                action: PasteSelection  }
 
 # Key bindings
 #
