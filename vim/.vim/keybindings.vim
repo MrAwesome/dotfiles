@@ -1,5 +1,6 @@
 " nmap <Leader>m :make check --all-targets<CR><CR><CR>
-nmap <Leader>m :AsyncMake<CR>
+nmap <Leader>m :JumpFixedDispatch make<CR>
+nmap <Leader>m :JumpFixedDispatch dispatch<CR>
 nmap <Leader>M :!reset && cargo test<CR>
 nmap <Leader>r :!reset && RUST_BACKTRACE=1 cargo run<CR>
 nmap <Leader>R :!reset && RUST_BACKTRACE=1 cargo run --release<CR>
@@ -19,8 +20,8 @@ nmap [1;2S :vimgrep /\C/ ##ODODODOD
 nmap <Leader>G yiw/"N:vimgrep /\<"\>\C/ ##<CR>
 
 " Jump between quickfix items with Control-N/P
-nnoremap  <Cmd>NextOrJumpToTop<CR>
-nnoremap  <Cmd>cprev<CR>
+nnoremap <C-n> <Cmd>NextOrJumpToTop<CR>
+nnoremap <C-p> <Cmd>BetterCMove prev<CR>
 
 au BufNewFile,BufRead *.rs map <Leader>p oprintln!("{:?}", );<ESC>hi
 "" TODO: make a language-specific and laptop-specific set of files
@@ -32,35 +33,71 @@ imap ( (<ESC>o);<ESC>kAk<ESC>==$"_xA
 imap [ [<ESC>o];<ESC>kAk<ESC>==$"_xA
 
 
-let s:firstrun = 0
+let g:firstrun = 0
 
-func! AsyncMake()
-    let s:firstrun = 1
-    Make
+func! JumpFixedDispatch(t)
+    let g:firstrun = 1
+
+    if a:t == 'make'
+        Make
+    elseif a:t == 'dispatch'
+        Dispatch
+    endif
 endfunc
-command AsyncMake call AsyncMake()
+command -nargs=1 JumpFixedDispatch call JumpFixedDispatch(<f-args>)
 
 func! NextOrJumpToTop()
     let x = 0
     let msg = ''
     " if s:firstrun is 1, echo lol
     try
-        if s:firstrun == 1
+        if g:firstrun == 1
             cfirst
         else
-            cnext
+            BetterCMove next
         endif
     catch
         let msg = v:errmsg
     endtry
 
-    echohl ErrorMsg
-    echo msg
-    echohl None
+    if msg != ''
+        echohl ErrorMsg
+        echo msg
+        echohl None
+    endif
 
-    let s:firstrun = 0
+    let g:firstrun = 0
 endfunc
 command NextOrJumpToTop call NextOrJumpToTop()
+
+func! BetterCMove(t)
+    let msg = ''
+    try 
+        if a:t == 'prev'
+            cprev
+        else
+            cnext
+        endif
+        echon ''
+    catch /^Vim\%((\a\+)\)\=:E553/
+        let msg = 'E553: No more items'
+
+        if a:t == 'prev'
+            silent! clast
+        else
+            silent! cfirst
+        endif
+    catch /^Vim\%((\a\+)\)\=:E42/
+        let msg = 'E42: No Errors'
+    endtry
+
+    if msg != ''
+        echohl ErrorMsg
+        echo msg
+        echohl None
+    endif
+endfunc
+command -nargs=1 BetterCMove call BetterCMove(<f-args>)
 
 
 "func! MyFilt(cmd)
