@@ -11,3 +11,11 @@ au BufNewFile,BufRead *.c setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=
 au BufNewFile,BufRead *.yml setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 
 "autocmd FileType php setlocal iskeyword+=:,-
+
+" If we're in a typescript project, use tsc errorformat
+if filereadable('tsconfig.json')
+    "au VimEnter * set errorformat=%f(%l\\,%c):%m
+    "au VimEnter * set errorformat=%E%f\ %#(%l\\,%c):\ error\ %m,%E%f %#(%l\\,%c)\: %m,%Eerror\ %m,%C%\\s%\+%m
+    "let &errorformat = '%E%f %#(%l\,%c): error %m,%E%f %#(%l\,%c): %m,%Eerror %m,%C%\s%\+%m'
+    compiler tsc
+endif

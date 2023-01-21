@@ -6,6 +6,8 @@ Plug 'rust-lang/rust.vim'
 "Plug 'pangloss/vim-javascript'
 "Plug 'maxmellon/vim-jsx-pretty'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'
+"Plug 'neomake/neomake'
 Plug 'junegunn/gv.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nanotech/jellybeans.vim'
