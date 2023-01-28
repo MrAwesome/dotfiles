@@ -1,7 +1,6 @@
 " nmap <Leader>m :make check --all-targets<CR><CR><CR>
-nmap <Leader>m :JumpFixedDispatch make<CR>
-nmap <Leader>m :JumpFixedDispatch dispatch<CR>
-nmap <Leader>M :!reset && cargo test<CR>
+
+"nmap <Leader>M :!reset && cargo test<CR>
 nmap <Leader>r :!reset && RUST_BACKTRACE=1 cargo run<CR>
 nmap <Leader>R :!reset && RUST_BACKTRACE=1 cargo run --release<CR>
 nmap <Leader>c <ESC>:make clippy --all-targets -- -D clippy::pedantic<CR>

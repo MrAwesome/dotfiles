@@ -1,6 +1,6 @@
 HOMEDIR="/home/$USER"
 ZDOTDIR="${HOMEDIR}/.zsh"
-PATH="${PATH}:${HOMEDIR}/.local/bin"
+PATH="${PATH}:${HOMEDIR}/.local/bin:node_modules/typescript/bin/:node_modules/.bin/"
 
 # FB master.zshrc
 source "${HOMEDIR}/.zsh/master.zsh"

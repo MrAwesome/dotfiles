@@ -184,4 +184,12 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 command! -nargs=0 Tsc :call CocAction('runCommand', 'tsserver.watchBuild')
 
 " map <c-\> to show copilot suggestions
-map <c-\> <Plug>(coc-copilot-expand)
+"map <c-\> <Plug>(coc-copilot-expand)
+imap <c-\> <Plug>(copilot-suggest)
+imap <Esc><S-Tab> <Plug>(copilot-previous)
+imap <Esc><Tab> <Plug>(copilot-next)
+"imap p <Cmd>Copilot panel<CR>
+"nmap p <Cmd>Copilot panel<CR>
+
+nmap <Leader>m <Cmd>JumpFixedDispatch make<CR>
+nmap <Leader>M <Cmd>JumpFixedDispatch dispatch<CR>

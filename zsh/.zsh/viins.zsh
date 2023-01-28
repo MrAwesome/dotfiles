@@ -19,8 +19,7 @@ zle -N copy-earlier-word
 bindkey "^[m" copy-earlier-word
 
 real-paste() {
-    zle vi-put-after
-    zle vi-forward-char
+    zle vi-put-before
 }
 zle -N real-paste
 bindkey -M viins "^Y" real-paste

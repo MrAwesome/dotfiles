@@ -173,3 +173,25 @@ filesize() {
     fi
 }
 alias fs=filesize
+
+# remove any newlines at the end of a file
+trimnewline() {
+    perl -i -0pe 's/\n\Z//' "$1"
+}
+
+latlong() {
+    #urlencode the args
+    arg=$(echo "$*" | jq -s -R -r @uri)
+    resp=$(curl -s "https://geocode.search.hereapi.com/v1/geocode?q=${arg}&limit=1&apiKey=$(cat ~/.hereapi)")
+
+
+    gotres=$(echo "$resp" | jq -r '.items[0]')
+
+    if [[ "$gotres" == "" || "$gotres" == "null" ]]; then
+        echo "Failed to find a result."
+        return
+    fi
+
+    # if access is available, use access, otherwise use position
+    echo "$resp" | jq -r '.items[0] | (.access[0] // .position) | [.lat, .lng] | @csv'
+}
