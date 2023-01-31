@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/data/users/glennh/fbsource/fbcode/instagram/deploy/igvenv'
-let g:netrw_dirhist_2='/data/users/glennh/fbsource/fbcode/instagram/deploy/igvenv/cli'
-let g:netrw_dirhist_3='/data/users/glennh/fbsource/fbcode/instagram/deploy/igvenv'
-let g:netrw_dirhist_4='/data/users/glennh/www-hg/flib/intern/sandcastle/instagram'
-let g:netrw_dirhist_5='/data/users/glennh/fbsource/fbcode/sandcastle/scutil'
-let g:netrw_dirhist_6='/data/users/glennh/fbsource/fbcode/sandcastle/scutil/scutil_cmds'
