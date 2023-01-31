@@ -17,6 +17,9 @@ source "${HOMEDIR}/.zsh/viins.zsh"
 # Glenny's custom aliases
 [ -f "${HOMEDIR}/.glennh_aliases.sh" ] && source "${HOMEDIR}/.glennh_aliases.sh"
 
+# Per-host aliases
+[ -f "${HOMEDIR}/.localhost_aliases.sh" ] && source "${HOMEDIR}/.localhost_aliases.sh"
+
 # # glennh's custom sush defines
 [ -f "${HOMEDIR}/.sushrc" ] && source "${HOMEDIR}/.sushrc"
 
