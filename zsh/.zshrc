@@ -29,3 +29,7 @@ alias bounce_interface='sudo ifconfig wlp3s0 down; sudo ifconfig wlp3s0 up'
 alias fb='fbterm -s 18 --font-names="Source Code Variable"'
 alias fbt='fbterm -s 18 --font-names="xos4 Terminus"'
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
