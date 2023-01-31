@@ -129,6 +129,7 @@ vimchhataigi() {
 alias vt=vimchhataigi
 alias st='ct; BROWSER=none HTTPS=true yarn start'
 alias tt='ct; CI=true yarn test --color --no-watch'
+alias ttt='ct; yarn test --color'
 
 alias deploytaigi='tt && (ct; export REACT_APP_LIBURRY_BUILD="chhataigi"; yarn build) && echo y | gcloud app deploy --project chhataigi'
 

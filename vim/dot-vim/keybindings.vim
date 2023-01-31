@@ -7,6 +7,10 @@ nmap <Leader>c <ESC>:make clippy --all-targets -- -D clippy::pedantic<CR>
 nmap <Leader>C <ESC>:!reset && cargo clippy --all-targets -- -D clippy::pedantic<CR>
 nmap <Leader>d yiwodbg!(&<ESC>pA);<ESC><CR>
 
+" JS/TS function bind
+" nmap ,B yiw?constructor(^Mf{%Othis.<ESC>pa = this.<ESC>pa.bind(this);<ESC>^M
+" nmap ,b diwathis.<ESC>pa = this.<ESC>pa.bind(this);<ESC>^M
+
 nmap <Space> :Buffers<CR>
 nmap <Leader>. <Leader>bej<CR>
 nmap <Leader>> <Leader>be
