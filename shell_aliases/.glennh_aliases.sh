@@ -195,3 +195,9 @@ latlong() {
     # if access is available, use access, otherwise use position
     echo "$resp" | jq -r '.items[0] | (.access[0] // .position) | [.lat, .lng] | @csv'
 }
+
+ai() {
+    cd ~/openai-cli
+    ts-node src/index.ts $*
+    cd - > /dev/null
+}
