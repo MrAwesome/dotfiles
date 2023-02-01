@@ -3,8 +3,8 @@
 # TODO: find a replacement for stow
 # TODO: pull in zsh changes from Dropbox
 
-thisdir="$(dirname "$0")"
-cd "$thisdir"
+# set to the absolute location of this script
+thisdir="$(cd "$(dirname "$0")" && pwd)"
 
 #progs=$(cat active_progs.txt)
 
@@ -35,5 +35,9 @@ do
 	else
 		echo "[ERROR] '$target_filename_full' exists and is not a symlink, skipping!"
 	fi
-
 done
+
+mkdir -p ~/bin
+
+# TODO: log, abstract away
+ln -sf "${thisdir}/bin/get_window_paste_xdotool_command.sh" "${HOME}/bin/get_window_paste_xdotool_command.sh"
