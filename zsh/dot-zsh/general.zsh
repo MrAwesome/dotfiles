@@ -20,7 +20,7 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 #setopt SHARE_HISTORY
 
-export CDPATH=~
+#export CDPATH=~
 
 ## never ever beep ever
 setopt NO_BEEP

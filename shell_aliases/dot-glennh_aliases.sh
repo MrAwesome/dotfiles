@@ -198,7 +198,39 @@ latlong() {
 }
 
 ai() {
-    cd ~/openai-cli
+    SCRIPT_DIR="${HOME}/openai-cli"
+    yarn \
+        --cwd="${SCRIPT_DIR}" \
+        run -s ts-node \
+        ${SCRIPT_DIR}/src/index.ts openai-completion $*
+}
+
+gen_unit_tests() {
+    filename="$1"
+    test_filename="${filename%.*}.test.ts"
+
+    ai -M 3000 \
+        -m 'text-davinci-003' \
+        -f "${filename}" \
+        --prompt-prefix "// Path: ${filename}" \
+        --prompt-suffix "// Path: ${test_filename}
+// Generate a typescript test file with unit tests for ${filename}, using the 'jest' library.
+// Generate at least 20 test cases.
+// Use the 'test.each' function to generate test cases (the 'data provider' pattern).
+// Be thorough. Test all the edge cases you can think of.
+" \
+        > validation.test.ts
+}
+
+bp() {(
+    cd ~/bp-monitor
     ts-node src/index.ts $*
-    cd - > /dev/null
+)}
+
+yarninit() {
+    mkdir -p src/
+    yarn add ts-node typescript
+    #yarn add -D @types/node eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier
+    touch src/index.ts
+
 }
