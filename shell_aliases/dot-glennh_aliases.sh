@@ -1,4 +1,4 @@
-export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin:$HOME/bin"
 
 export CONSOLE_BROWSER=elinks
 
@@ -41,6 +41,10 @@ vac () {
 
 hgrep () {
     rg $* $HISTFILE
+}
+
+hcat () {
+    cat $HISTFILE
 }
 
 booknew() {
@@ -232,5 +236,4 @@ yarninit() {
     yarn add ts-node typescript
     #yarn add -D @types/node eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier
     touch src/index.ts
-
 }
