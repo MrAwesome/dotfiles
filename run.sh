@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # TODO: find a replacement for stow
 # TODO: pull in zsh changes from Dropbox
