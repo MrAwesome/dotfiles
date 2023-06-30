@@ -75,3 +75,4 @@ mkdir -p ~/bin
 
 # TODO: log, abstract away
 ln -sf "${thisdir}/bin/get_window_paste_xdotool_command.sh" "${HOME}/bin/get_window_paste_xdotool_command.sh"
+ln -sf "${thisdir}/bin/weechat/weechat_tmux.sh" "${HOME}/bin/weechat_tmux.sh"
