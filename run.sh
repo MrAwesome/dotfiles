@@ -41,10 +41,10 @@ do
 
     final_linkname_no_dot=$(echo "$filename_local" | sed -E 's,[^/]+/dot-([^/]+)$,\1,')
     # if the filename ends in -hostname:<hostname>, then only link it if the hostname matches
-    has_hostname=$(echo "$filename_local" | grep -E '/dot-[^/]*?-hostname:[^/]+$' || true)
+    has_hostname=$(echo "$filename_local" | rg '/dot-[^/]*?-hostname:[^/]+$' || true)
     if [[ "$has_hostname" != "" ]]; then
         desired_hostname=$(echo "$filename_local" | sed -E 's,[^/]+/dot-[^/]+-hostname:([^/]+)$,\1,')
-        current_hostname=$(cat /etc/hostname)
+        current_hostname=$([ -f /etc/hostname ] && cat /etc/hostname || hostname -s)
         if [[ "$desired_hostname" != "$current_hostname" ]]; then
             echo "(SKIP: hostname mismatch)"
             echo
