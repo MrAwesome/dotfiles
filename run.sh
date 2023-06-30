@@ -21,6 +21,15 @@ cd "$thisdir"
 #stow -v --dotfiles $prog --ignore="${ignore_regex}"
 #done
 
+# TODO: abstract away
+mkdir -p "${HOME}/.config/tmux"
+ln -snf "${thisdir}/config/tmux/tmux.conf" "${HOME}/.config/tmux/tmux.conf"
+echo "[config/tmux/tmux.conf]"
+echo "${HOME}/.config/tmux/tmux.conf ->
+    ${thisdir}/config/tmux/tmux.conf"
+echo
+
+
 # Unfortunately, --dotfiles is broken for directories with stow, so do this by hand until you find a suitable replacement
 for filename_local in vim/* \
     xinitrc/* \
