@@ -2,9 +2,9 @@
 
 REM_HOST="gleesus.net"
 
-# If running over ssh, connect to the remote tmux session
+# TODO: check for .weechat_master instead, and set that from ansible
 if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
-    tmux attach-session -t weechat || tmux new-session -s weechat
+    tmux attach-session -t weechat || tmux new-session -s weechat -d weechat
 else
-    ssh "$REM_HOST" "./bin/weechat_tmux.sh"
+    ssh -t "$REM_HOST" "./bin/weechat_tmux.sh"
 fi
