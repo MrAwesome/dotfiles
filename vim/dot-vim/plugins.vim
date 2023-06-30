@@ -77,7 +77,10 @@ endfunction
 
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" Only do this if Coc is installed:
+if (exists('*coc#rpc#start_server'))
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+endif
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
