@@ -5,7 +5,6 @@
 #
 
 export EDITOR="vim"
-export PATH="$PATH:/home/glennh/bin:/home/glennh/bin/sandcastle"
 
 export ADMIN_SCRIPTS=/mnt/vol/engshare/admin/scripts
 [ -f "${ADMIN_SCRIPTS}/scm-prompt" ] && source "${ADMIN_SCRIPTS}/scm-prompt"
@@ -53,8 +52,14 @@ setopt PROMPT_SUBST
 #%F{yellow}<%F{green}%n@%m%F{white}:%F{yellow}%~%F{yellow}>
 #%f%B$%b '
 
+if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
+    export hostname_color="%F{magenta}"
+else
+    export hostname_color="%F{green}"
+fi
+
 export PROMPT='%F{yellow}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{yellow}]%F{yellow}[%F{green}%l%F{yellow}]%(?..[%F{red}%?%1v%F{yellow}] )
-%F{yellow}<%F{green}%n@%m%F{white}:%F{yellow}%~%F{yellow}>
+%F{yellow}<%F{green}%n@'"${hostname_color}"'%m%F{white}:%F{yellow}%~%F{yellow}>
 %f%B$%b '
 
 #export PROMPT='%F{yellow}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{yellow}]%F{yellow}[%F{green}%l%F{yellow}]%F{yellow}])%(?..[%F{red}%?%1v%F{yellow}] )

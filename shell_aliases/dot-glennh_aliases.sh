@@ -28,7 +28,8 @@ gac () {
 gac_inner () {
     PREFIX="$(git rev-parse --show-toplevel)/"
     git status -u --porcelain=v1 | sed 's/^...//' | awk '{ print "'"$PREFIX"'" $1 }'
-    #git diff-tree --no-commit-id --name-only -r HEAD | awk '{ print "'"$PREFIX"'" $1 }'
+    git diff-tree --no-commit-id --name-only -r HEAD | awk '{ print "'"$PREFIX"'" $1 }'
+    #all=$(echo "$current" "$older" | sort | uniq)
     #git status -u -s | sed "s/^...//"
     for f in $*; do
         echo "$f"
@@ -206,14 +207,20 @@ ai() {
     yarn \
         --cwd="${SCRIPT_DIR}" \
         run -s ts-node \
-        ${SCRIPT_DIR}/src/index.ts openai-completion $*
+        "${SCRIPT_DIR}/src/index.ts" openai-completion $*
 }
 
 gen_unit_tests() {
     filename="$1"
     test_filename="${filename%.*}.test.ts"
 
-    ai -M 3000 \
+    file_contents=""
+    if [[ -f "${test_filename}" ]]; then
+        file_contents=$(cat "${test_filename}")
+    fi
+
+    #-m 'code-davinci-002' \
+    ai -M 1500 \
         -m 'text-davinci-003' \
         -f "${filename}" \
         --prompt-prefix "// Path: ${filename}" \
@@ -221,9 +228,10 @@ gen_unit_tests() {
 // Generate a typescript test file with unit tests for ${filename}, using the 'jest' library.
 // Generate at least 20 test cases.
 // Use the 'test.each' function to generate test cases (the 'data provider' pattern).
-// Be thorough. Test all the edge cases you can think of.
-" \
-        > validation.test.ts
+// Be thorough. Test all the edge cases you can think of. Do not generate any other files, just this test file.
+
+${file_contents}" \
+        >> ${test_filename}
 }
 
 bp() {(
@@ -233,7 +241,8 @@ bp() {(
 
 yarninit() {
     mkdir -p src/
-    yarn add ts-node typescript
+    yarn add ts-node typescript $*
+    yarn add --dev @types/node
     #yarn add -D @types/node eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier
     touch src/index.ts
 }
