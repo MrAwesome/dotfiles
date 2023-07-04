@@ -21,6 +21,10 @@ alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
 #    fi
 #}
 
+deps () {
+    pacman -Qi $* | grep -e Depends -e Optional
+}
+
 gac () {
     gac_inner $* | sort | uniq
 }
@@ -245,4 +249,23 @@ yarninit() {
     yarn add --dev @types/node
     #yarn add -D @types/node eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier
     touch src/index.ts
+}
+
+gpt4() {
+    SCRIPT_DIR="${HOME}/openai-cli"
+    yarn \
+        --cwd="${SCRIPT_DIR}" \
+        run -s ts-node \
+        ${SCRIPT_DIR}/misc/testGPT4.ts $*
+}
+
+ca() {
+    cd ~/openai-cli
+}
+
+va() {
+    ca
+    vim \
+        src/index.ts \
+        $(find src | rg '\.ts$')
 }

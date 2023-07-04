@@ -110,3 +110,12 @@ command -nargs=1 BetterCMove call BetterCMove(<f-args>)
 "    echom trim(system(shcmd, execute(vimcmd)))
 "endfunc
 ":command -nargs=1 MyFilt call MyFilt(<f-args>)
+
+" Highlight characters over 280 in a line.
+function! Highlight280()
+    syntax match OverLength /\%>280v./
+    hi OverLength ctermbg=red ctermfg=white guibg=red guifg=white
+endfunction
+
+" Create a keybinding to call Highlight280 function.
+nnoremap <leader>h :call Highlight280()<CR>
