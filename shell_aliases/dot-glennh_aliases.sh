@@ -7,6 +7,9 @@ alias vimvim='vim ~/.vim/plugins.vim ~/.vimrc ~/.vim/*.vim'
 alias val="vim ~/.glennh_aliases.sh && source ~/.glennh_aliases.sh"
 alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
 
+if command -v yarnpkg &>/dev/null; then
+    alias yarn=yarnpkg
+fi
 
 # "vim all changed"
 #alias vac=$'vim $(git diff-tree --no-commit-id --name-only -r HEAD && git status -s | awk \'{print $2}\')'
