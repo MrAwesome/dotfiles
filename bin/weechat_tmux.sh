@@ -7,5 +7,5 @@ REM_HOST="gleesus.net"
 if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
     tmux new-session -A -s weechat weechat
 else
-    ssh -t "$REM_HOST" "./bin/weechat_tmux.sh"
+    mosh "$REM_HOST" "./bin/weechat_tmux.sh"
 fi
