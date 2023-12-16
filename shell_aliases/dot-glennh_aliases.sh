@@ -1,3 +1,6 @@
+export ANDROID_SDK_ROOT="/home/glenn/Android/Sdk"
+export ANDROID_HOME="/home/glenn/Android/Sdk"
+#export ANDROID_HOME="/opt/android-sdk"
 export PATH="$PATH:$HOME/.cargo/bin:$HOME/bin"
 
 export CONSOLE_BROWSER=elinks
@@ -10,6 +13,10 @@ alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
 if command -v yarnpkg &>/dev/null; then
     alias yarn=yarnpkg
 fi
+
+alias rc='sudo loadkeys <<< "keycode 58 = Escape"'
+alias tm='tmux attach || tmux'
+alias py='python3'
 
 # "vim all changed"
 #alias vac=$'vim $(git diff-tree --no-commit-id --name-only -r HEAD && git status -s | awk \'{print $2}\')'
@@ -145,9 +152,6 @@ alias ttt='ct; yarn test --color'
 
 alias deploytaigi='tt && (ct; export REACT_APP_LIBURRY_BUILD="chhataigi"; yarn build) && echo y | gcloud app deploy --project chhataigi'
 
-alias rc='sudo loadkeys <<< "keycode 58 = Escape"'
-alias tm='tmux attach || tmux'
-
 alias wgup="sudo wg-quick up wg0"
 alias wgdown="sudo wg-quick down wg0"
 alias wged="wgdown; sudo vim /etc/wireguard/wg0.conf; wgup"
@@ -180,7 +184,12 @@ jsontocsv() {
 
 filesize() {
     if [[ "$*" == "" ]]; then
+        # will only work in zsh
         du -sh * | rg '^[0-9\.]+G'
+
+        if [ -n "$ZSH_VERSION" ]; then
+            du -sh .* | rg '^[0-9\.]+G'
+        fi
     else
         du -sh $* | rg '^[0-9\.]+G'
     fi
@@ -271,4 +280,8 @@ va() {
     vim \
         src/index.ts \
         $(find src | rg '\.ts$')
+}
+
+ntfs_rsync() {
+    rsync --progress -P -rDvz $*
 }
