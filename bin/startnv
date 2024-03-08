@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export NO_REDSHIFT=1
+export GIMPY_NO_STARTUP=1
+export GIMPY_NVIDIA_MODE=1
+startx -- -config xorg.conf.nvidia_only

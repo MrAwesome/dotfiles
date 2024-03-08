@@ -13,7 +13,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nanotech/jellybeans.vim'
 Plug 'noah/vim256-color'
 Plug 'junegunn/fzf.vim'
-Plug 'github/copilot.vim'
+"Plug 'github/copilot.vim'
 Plug '/usr/bin/fzf'
 call plug#end()
 
@@ -32,8 +32,8 @@ colorscheme heroku-terminal
 " Original COC bindings, see bottom for snippet bindings
 "
 " inoremap <silent><expr> <TAB>
-"inoremap <silent><expr> <TAB>
-inoremap <silent><expr> <c-q>
+"inoremap <silent><expr> <c-q>
+inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
@@ -167,19 +167,19 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "imap <C-j> <Plug>(coc-snippets-expand-jump)
 "" Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
 "
-"inoremap <silent><expr> <TAB>
-"      \ pumvisible() ? coc#_select_confirm() :
-"      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-"      \ <SID>check_back_space() ? "\<TAB>" :
-"      \ coc#refresh()
-"
-"
-"function! s:check_back_space() abort
-"  let col = col('.') - 1
-"  return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-"
-"let g:coc_snippet_next = '<tab>'
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 "
 """"""""""""""""""""""""""""""""""""""""""""
 
@@ -188,9 +188,9 @@ command! -nargs=0 Tsc :call CocAction('runCommand', 'tsserver.watchBuild')
 
 " map <c-\> to show copilot suggestions
 "map <c-\> <Plug>(coc-copilot-expand)
-imap <c-\> <Plug>(copilot-suggest)
-imap <Esc><S-Tab> <Plug>(copilot-previous)
-imap <Esc><Tab> <Plug>(copilot-next)
+"imap <c-\> <Plug>(copilot-suggest)
+"imap <Esc><S-Tab> <Plug>(copilot-previous)
+"imap <Esc><Tab> <Plug>(copilot-next)
 "imap p <Cmd>Copilot panel<CR>
 "nmap p <Cmd>Copilot panel<CR>
 

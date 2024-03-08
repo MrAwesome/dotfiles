@@ -8,6 +8,7 @@ export CONSOLE_BROWSER=elinks
 # Convenience functions for editing configs quickly
 alias vimvim='vim ~/.vim/plugins.vim ~/.vimrc ~/.vim/*.vim'
 alias val="vim ~/.glennh_aliases.sh && source ~/.glennh_aliases.sh"
+alias cdawesome="cd ~/.config/awesome/gimpy/"
 alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
 
 if command -v yarnpkg &>/dev/null; then

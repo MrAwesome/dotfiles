@@ -13,8 +13,8 @@ maps=$(pmap $pid)
 is_gtk=$(echo $maps | grep -oP 'libgtk')
 is_qt=$(echo $maps | grep -oP 'libQt')
 
-echo "is gtk: $is_gtk"
-echo "is qt: $is_qt"
+#echo "is gtk: $is_gtk"
+#echo "is qt: $is_qt"
 
 # get the clipboard command
 if [ -n "$is_gtk" ] || [ -n "$is_qt" ]; then
