@@ -1,10 +1,10 @@
 # TODO: move to dotfiles
 #/usr/bin/prime-offload &
-#if [ "$GIMPY_AMDGPU_MODE" = "" ]; then
-#    xrandr --setprovideroutputsource modesetting NVIDIA-0
-#    xrandr --auto
-#fi
-#xrandr --dpi 96
+if [ ! "$GIMPY_NVIDIA_MODE" = "" ]; then
+    xrandr --setprovideroutputsource modesetting NVIDIA-0
+    xrandr --auto
+fi
+#xrandr --dpi 288
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
@@ -40,7 +40,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 if [ "$NO_REDSHIFT" = "" ]; then
-    redshift &
+    :
+    #redshift &
 fi
 
 parcellite &
@@ -48,7 +49,9 @@ eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK
 
 xrdb -merge ~/.Xresources &
+xrdb -merge ~/.Xdefaults &
 
-xinput --set-prop 11 'libinput Accel Speed' -1
+xinput --set-prop "DELL Alienware 610M" 'libinput Accel Speed' -1 &
+xhidecursor &
 
-exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+exec /usr/bin/awesome -a >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr

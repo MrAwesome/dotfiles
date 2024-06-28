@@ -14,6 +14,10 @@ echo "Press the sync button on the controller, then wait up to 10 seconds..."
 CONTROLLER=$(timeout 10 bluetoothctl scan on | rg "$CONTROLLER_BLUETOOTH_NAME" | awk '{ print $3 }')
 
 if [[ -z "$CONTROLLER" ]]; then
+    bluetoothctl trust 'DC:CD:18:A3:7D:3E'
+    sleep 1
+    bluetoothctl pair 'DC:CD:18:A3:7D:3E'
+    sleep 1
     bluetoothctl connect 'DC:CD:18:A3:7D:3E'
 else
     bluetoothctl connect "$CONTROLLER"

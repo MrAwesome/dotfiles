@@ -81,7 +81,7 @@ cargnew() {
     vim -O src/main.rs src/lib.rs
 }
 
-alias brite='sudo brightness_ronnie.sh'
+alias brite='sudo brightness.sh'
 alias j='source ~/Dropbox/journal/aliases.sh; j'
 
 ddg() {
@@ -285,4 +285,8 @@ va() {
 
 ntfs_rsync() {
     rsync --progress -P -rDvz $*
+}
+
+mw() {
+    ~/syncthing/morrowind/run.sh
 }
