@@ -4,8 +4,7 @@
             "command": "ccls",
             "filetypes": [
                 "c",
-                "cpp",
-                "objc",
+                "cpp", "objc",
                 "objcpp"
             ],
             "rootPatterns": [
@@ -32,14 +31,18 @@
     "diagnostic.checkCurrentLine": true,
     "diagnostic.messageTarget": "float",
     "diagnostic.level": "information",
-    "suggest.autoTrigger": "none",
     "signature.enable": false,
-    "coc.preferences.snippets.enable": false,
+    "coc.preferences.snippets.enable": true,
+    "suggest.noselect": true,
+    "suggest.enablePreselect": false,
+    "suggest.autotrigger": "trigger",
 
-    "BLEHrust-analyzer.diagnostics.enable": false,
-    "BLEHrust-analyzer.server.path": "/home/glenn/bin/rust-analyzer-wrapper",
-    "BLEHrust-analyzer.cargo.target": "mipsel-sony-psp",
+    //"BLEHrust-analyzer.diagnostics.enable": false,
+    //"BLEHrust-analyzer.server.path": "/home/glenn/bin/rust-analyzer-wrapper",
+    //"BLEHrust-analyzer.cargo.target": "mipsel-sony-psp",
     "python.linting.banditEnabled": true,
     "eslint.packageManager": "yarn",
-    "eslint.formatter": "prettier"
+    "eslint.formatter": "prettier",
+
+    "inlayHint.enable":false
 }

@@ -2,6 +2,8 @@ bindkey -M viins "\e." insert-last-word
 bindkey -M viins "^?" backward-delete-char
 bindkey -M viins "^[[A" history-beginning-search-backward
 bindkey -M viins "^[[B" history-beginning-search-forward
+bindkey -M viins "^P" history-beginning-search-backward
+bindkey -M viins "^N" history-beginning-search-forward
 bindkey -M viins "^L" clear-screen
 bindkey -M viins "^A" beginning-of-line
 bindkey -M viins "^E" end-of-line

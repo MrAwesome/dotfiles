@@ -119,3 +119,12 @@ endfunction
 
 " Create a keybinding to call Highlight280 function.
 nnoremap <leader>h :call Highlight280()<CR>
+
+function! AIFilterFunction(prefix)
+    let filetext = join(getline(1,'$'), "\n")
+    let aiinput = "Perform the following actions WITHOUT any explanations. Return only code, and do NOT include triple backticks at the beginning and end." . a:prefix . "\n\n" . filetext
+    let aioutput = system("ai", aiinput)
+    echo aioutput
+endfunction
+
+"command! -range=% AIFilter <line1>,<line2> call AIFilterFunction(<f-args>)
