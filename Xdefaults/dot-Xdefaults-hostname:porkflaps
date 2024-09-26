@@ -79,8 +79,9 @@ URxvt*scrollBar: false
 !URxvt*keysym.F11:       perl:fullscreen:switch
 
 URxvt*url-launcher:          firefox
-URxvt*perl-ext-common:  resize-font,matcher
+URxvt*perl-ext-common:  resize-font,matcher,custom-launch
 URxvt*matcher.button: 1
+URxvt*keysym.F10:       perl:custom-launch:urxvt_day_mode
 !URxvt*keysym.F11:       perl:fullscreen:switch
 
 ! Add "fullscreen" to the "urxvt*perl-ext-common" field in ~/.Xdefaults and

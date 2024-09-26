@@ -23,11 +23,7 @@ source "${HOMEDIR}/.zsh/viins.zsh"
 # # glennh's custom sush defines
 [ -f "${HOMEDIR}/.sushrc" ] && source "${HOMEDIR}/.sushrc"
 
-alias daytime=$'printf \'\033]10;black\007\'; printf \'\033]11;white\007\''
-alias nighttime=$'printf \'\033]10;white\007\'; printf \'\033]11;black\007\''
-
 alias bounce_interface='sudo ifconfig wlp3s0 down; sudo ifconfig wlp3s0 up'
-
 
 alias fb='fbterm -s 18 --font-names="Source Code Variable"'
 alias fbt='fbterm -s 18 --font-names="xos4 Terminus"'

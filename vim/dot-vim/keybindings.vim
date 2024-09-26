@@ -14,7 +14,7 @@ nmap <Leader>d yiwodbg!(&<ESC>pA);<ESC><CR>
 nmap <Space> :Buffers<CR>
 nmap <Leader>. <Leader>bej<CR>
 nmap <Leader>> <Leader>be
-nmap <Leader>t :vert botright term ++cols=40<CR>
+nmap <Leader>T :vert botright term ++cols=40<CR>
 
 " vimgrep on all buffers
 nmap <Leader>g :vimgrep /\C/ ##ODODODOD

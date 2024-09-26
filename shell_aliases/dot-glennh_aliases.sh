@@ -11,6 +11,7 @@ alias val="vim ~/.glennh_aliases.sh && source ~/.glennh_aliases.sh"
 alias cdawesome="cd ~/.config/awesome/gimpy/"
 alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
 
+
 if command -v yarnpkg &>/dev/null; then
     alias yarn=yarnpkg
 fi
@@ -153,6 +154,13 @@ alias ttt='ct; yarn test --color'
 
 alias deploytaigi='tt && (ct; export REACT_APP_LIBURRY_BUILD="chhataigi"; yarn build) && echo y | gcloud app deploy --project chhataigi'
 
+alias cdd='cd ~/decktricks'
+vimdeck() {
+    cdd
+    vim src/*.rs src/*/*.rs TODO config.json Cargo.toml
+}
+alias vd='vimdeck'
+
 alias wgup="sudo wg-quick up wg0"
 alias wgdown="sudo wg-quick down wg0"
 alias wged="wgdown; sudo vim /etc/wireguard/wg0.conf; wgup"
@@ -227,6 +235,12 @@ ai() {
         "${SCRIPT_DIR}/src/index.ts" openai-completion $*
 }
 
+code() {
+    ai -M 4096 "The following instructions are from a command-line program on Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Instructions start now:
+
+$*"
+}
+
 gen_unit_tests() {
     filename="$1"
     test_filename="${filename%.*}.test.ts"
@@ -248,11 +262,11 @@ gen_unit_tests() {
 // Be thorough. Test all the edge cases you can think of. Do not generate any other files, just this test file.
 
 ${file_contents}" \
-        >> ${test_filename}
+        >> "${test_filename}"
 }
 
 bp() {(
-    cd ~/bp-monitor
+    cd ~/bp-monitor || exit
     ts-node src/index.ts $*
 )}
 

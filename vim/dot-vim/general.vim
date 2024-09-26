@@ -132,7 +132,7 @@ vmap <Leader>c :s/^/\/\//<CR>
 nmap <Leader>k <ESC>:!./%<CR>
 nmap <Leader>x :!chmod +x %<CR>l
 nmap <Leader>w <C-W><C-W>
-nmap <Leader>z :lcl
+nmap <Leader>z :ccl
 nmap <Leader>v :tabedit ~/.vim/general.vim<CR>
 nmap <Leader>V :source ~/.vimrc<CR>
 nmap <Leader>q @w

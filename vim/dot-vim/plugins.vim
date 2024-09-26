@@ -1,3 +1,4 @@
+
 call plug#begin('~/.vim/plugged')
 "Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
@@ -16,7 +17,6 @@ Plug 'junegunn/fzf.vim'
 "Plug 'github/copilot.vim'
 Plug '/usr/bin/fzf'
 call plug#end()
-
 colorscheme heroku-terminal
 "colorscheme seoul256-light
 
@@ -182,5 +182,8 @@ command! -nargs=0 Tsc :call CocAction('runCommand', 'tsserver.watchBuild')
 "imap p <Cmd>Copilot panel<CR>
 "nmap p <Cmd>Copilot panel<CR>
 
-nmap <Leader>m <Cmd>JumpFixedDispatch make<CR>
-nmap <Leader>M <Cmd>JumpFixedDispatch dispatch<CR>
+"nmap <Leader>m <Cmd>JumpFixedDispatch make<CR>
+"nmap <Leader>M <Cmd>JumpFixedDispatch dispatch<CR>
+"
+nmap <Leader>m <Cmd>Make check<CR>
+nmap <Leader>t <Cmd>Make test<CR>
