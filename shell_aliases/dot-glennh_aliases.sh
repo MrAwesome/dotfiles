@@ -12,10 +12,14 @@ alias cdawesome="cd ~/.config/awesome/gimpy/"
 alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
 
 
+alias webshare="ip addr show | rg inet.192; php -S 0.0.0.0:6969"
+alias moonshine="cd ~/code/moonshine && cargo run --release -- config.toml"
+
 if command -v yarnpkg &>/dev/null; then
     alias yarn=yarnpkg
 fi
 
+alias ls='ls --color=auto'
 alias rc='sudo loadkeys <<< "keycode 58 = Escape"'
 alias tm='tmux attach || tmux'
 alias py='python3'
@@ -64,16 +68,6 @@ hcat () {
     cat $HISTFILE
 }
 
-booknew() {
-    cd ~/Dropbox/rust/rust_book_work
-    cargnew $*
-}
-
-cracknew() {
-    cd ~/Dropbox/rust/cracking_in_rust
-    cargnew $*
-}
-
 cargnew() {
     if [ ! -d "$_" ]; then
         cargo new --lib $*
@@ -97,6 +91,7 @@ gcommit () {
 gpush () {
     git add -A && git commit -m "$1" && git push
 }
+alias gds='git diff --staged'
 
 cdrust () {
     cd ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/
@@ -116,11 +111,11 @@ alias rcs='rustcargosearch '
 alias rs='rustsearch '
 
 vimruwi () {
-    cd ~/ruwi && vim $(find src/ tests/ | rg '\.rs$' | shuf) Cargo.toml
+    cd ~/code/ruwi && vim $(find src/ tests/ | rg '\.rs$' | shuf) Cargo.toml
 }
 installruwi () {
     sudo -v &&
-    cd ~/ruwi &&
+    cd ~/code/ruwi &&
     cargo test --release &&
     cargo build --release &&
     sudo cp ./target/release/ruwi /usr/local/bin  &&
@@ -128,9 +123,9 @@ installruwi () {
 }
 
 alias vr=vimruwi
-alias cdr='cd ~/ruwi'
+alias cdr='cd ~/code/ruwi'
 
-alias ct='cd ~/Liburry'
+alias ct='cd ~/code/Liburry'
 lintaigi() {
     setopt nullglob
     ct &&
@@ -154,12 +149,15 @@ alias ttt='ct; yarn test --color'
 
 alias deploytaigi='tt && (ct; export REACT_APP_LIBURRY_BUILD="chhataigi"; yarn build) && echo y | gcloud app deploy --project chhataigi'
 
-alias cdd='cd ~/decktricks'
+alias cdd='cd ~/code/decktricks'
 vimdeck() {
     cdd
-    vim src/*.rs src/*/*.rs TODO config.json Cargo.toml
+    vim src/*.rs src/*/*.rs tests/*/*.{rs,json} TODO config.json Cargo.toml
 }
 alias vd='vimdeck'
+decktricks() {
+    (cdd && cargo run --quiet -- $*)
+}
 
 alias wgup="sudo wg-quick up wg0"
 alias wgdown="sudo wg-quick down wg0"
@@ -228,7 +226,7 @@ latlong() {
 }
 
 ai() {
-    SCRIPT_DIR="${HOME}/openai-cli"
+    SCRIPT_DIR="${HOME}/code/openai-cli"
     yarn \
         --cwd="${SCRIPT_DIR}" \
         run -s ts-node \
@@ -236,7 +234,7 @@ ai() {
 }
 
 code() {
-    ai -M 4096 "The following instructions are from a command-line program on Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Instructions start now:
+    ai -M 4096 "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Instructions start now:
 
 $*"
 }
@@ -266,7 +264,7 @@ ${file_contents}" \
 }
 
 bp() {(
-    cd ~/bp-monitor || exit
+    cd ~/code/bp-monitor || exit
     ts-node src/index.ts $*
 )}
 
@@ -279,7 +277,7 @@ yarninit() {
 }
 
 gpt4() {
-    SCRIPT_DIR="${HOME}/openai-cli"
+    SCRIPT_DIR="${HOME}/code/openai-cli"
     yarn \
         --cwd="${SCRIPT_DIR}" \
         run -s ts-node \
@@ -287,7 +285,7 @@ gpt4() {
 }
 
 ca() {
-    cd ~/openai-cli
+    cd ~/code/openai-cli
 }
 
 va() {

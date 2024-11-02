@@ -19,11 +19,14 @@
                     "directory": "/tmp/ccls"
                 }
             }
+        },
+
+        "godot": {
+            "host": "127.0.0.1",
+            "filetypes": ["gd", "gdscript3", "gdscript4", "gdscript"],
+            "port": 6005
         }
     },
-    "BLEHpython.jediEnabled": false,
-    "BLEHpython.linting.mypyEnabled": false,
-    "BLEHpython.linting.pylintEnabled": false,
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
 
@@ -37,12 +40,12 @@
     "suggest.enablePreselect": false,
     "suggest.autotrigger": "trigger",
 
-    //"BLEHrust-analyzer.diagnostics.enable": false,
-    //"BLEHrust-analyzer.server.path": "/home/glenn/bin/rust-analyzer-wrapper",
-    //"BLEHrust-analyzer.cargo.target": "mipsel-sony-psp",
+    "rust-analyzer.check.command": "clippy",
+    "rust-analyzer.checkOnSave": true,
     "python.linting.banditEnabled": true,
     "eslint.packageManager": "yarn",
     "eslint.formatter": "prettier",
+    "python.linting.banditArgs": ["--ini", ".bandit"],
 
-    "inlayHint.enable":false
+    "inlayHint.enable": false
 }

@@ -29,8 +29,16 @@ unsetopt beep
 bindkey -v
 export KEYTIMEOUT=1
 
+# Load and run completion initialization
+fpath+=($HOME/.zsh/completion)
+
 autoload -Uz compinit
 compinit
+#
+# Enable bash completion for select commands
+autoload -U bashcompinit
+bashcompinit -i
+
 
 #allow tab completion in the middle of a word
 #setopt COMPLETE_IN_WORD
@@ -68,19 +76,3 @@ export PROMPT='%F{yellow}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{yellow}]%F{yellow}[%F{
 
 # Real comments
 setopt interactivecomments
-
-alias ls='ls --color=auto'
-
-# Anti-TMUX Alliance
-for FBSOURCE_TYPE in fbcode fbandroid fbobjc; do
-    prefix="^/data/users/$USER/fbsource/$FBSOURCE_TYPE"
-    if grep -q "$prefix" <<< "$PWD"; then 
-        suffix=$(sed "s,$prefix,," <<< "$PWD")
-        cd ~/$FBSOURCE_TYPE/$suffix
-    fi
-done
-prefix="^/data/users/$USER/opsfiles-hg"
-if grep -q "$prefix" <<< "$PWD"; then 
-    suffix=$(sed "s,$prefix,," <<< "$PWD")
-    cd ~/opsfiles/$suffix
-fi

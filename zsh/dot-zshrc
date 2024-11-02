@@ -1,9 +1,8 @@
+#zmodload zsh/zprof
+
 HOMEDIR="/home/$USER"
 ZDOTDIR="${HOMEDIR}/.zsh"
 PATH="${PATH}:${HOMEDIR}/.local/bin:${HOMEDIR}/bin:node_modules/typescript/bin/:node_modules/.bin/"
-
-# FB master.zshrc
-source "${HOMEDIR}/.zsh/master.zsh"
 
 # General settings for Glenn
 source "${HOMEDIR}/.zsh/general.zsh"
@@ -34,3 +33,5 @@ alias fbt='fbterm -s 18 --font-names="xos4 Terminus"'
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+#zprof

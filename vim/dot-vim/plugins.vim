@@ -17,8 +17,10 @@ Plug 'junegunn/fzf.vim'
 "Plug 'github/copilot.vim'
 Plug '/usr/bin/fzf'
 call plug#end()
-colorscheme heroku-terminal
+
+"colorscheme heroku-terminal
 "colorscheme seoul256-light
+colorscheme babymate256
 
 "source ~/.vim/ale.vim
 
@@ -85,8 +87,8 @@ endif
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -118,6 +120,7 @@ xmap <silent> <C-d> <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
+nmap <Leader>f :Format<CR>
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
@@ -186,4 +189,5 @@ command! -nargs=0 Tsc :call CocAction('runCommand', 'tsserver.watchBuild')
 "nmap <Leader>M <Cmd>JumpFixedDispatch dispatch<CR>
 "
 nmap <Leader>m <Cmd>Make check<CR>
+nmap <Leader>M <Cmd>Make clippy<CR>
 nmap <Leader>t <Cmd>Make test<CR>
