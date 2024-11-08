@@ -2,6 +2,8 @@
 
 HOMEDIR="/home/$USER"
 ZDOTDIR="${HOMEDIR}/.zsh"
+ONE_OFF="${HOMEDIR}/.one_off.zsh"
+
 PATH="${PATH}:${HOMEDIR}/.local/bin:${HOMEDIR}/bin:node_modules/typescript/bin/:node_modules/.bin/"
 
 # General settings for Glenn
@@ -33,5 +35,10 @@ alias fbt='fbterm -s 18 --font-names="xos4 Terminus"'
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+if [ -f "$ONE_OFF" ]; then
+    mv "$ONE_OFF" /tmp/one_off_tmp.zsh
+    zsh /tmp/one_off_tmp.zsh
+fi
 
 #zprof

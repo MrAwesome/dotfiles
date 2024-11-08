@@ -1,4 +1,3 @@
-
 call plug#begin('~/.vim/plugged')
 "Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
@@ -12,7 +11,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'junegunn/gv.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nanotech/jellybeans.vim'
-Plug 'noah/vim256-color'
+"Plug 'noah/vim256-color'
 Plug 'junegunn/fzf.vim'
 "Plug 'github/copilot.vim'
 Plug '/usr/bin/fzf'
@@ -20,7 +19,8 @@ call plug#end()
 
 "colorscheme heroku-terminal
 "colorscheme seoul256-light
-colorscheme babymate256
+"colorscheme babymate256
+colorscheme default
 
 "source ~/.vim/ale.vim
 

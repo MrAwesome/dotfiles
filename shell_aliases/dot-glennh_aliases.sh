@@ -150,9 +150,10 @@ alias ttt='ct; yarn test --color'
 alias deploytaigi='tt && (ct; export REACT_APP_LIBURRY_BUILD="chhataigi"; yarn build) && echo y | gcloud app deploy --project chhataigi'
 
 alias cdd='cd ~/code/decktricks'
+alias cddd='cd ~/code/decktricks/gui/godot'
 vimdeck() {
     cdd
-    vim src/*.rs src/*/*.rs tests/*/*.{rs,json} TODO config.json Cargo.toml
+    vim TODO src/*.rs src/*/*.rs tests/*/*.{rs,json} config.json Cargo.toml
 }
 alias vd='vimdeck'
 decktricks() {
