@@ -17,16 +17,6 @@ Plug 'junegunn/fzf.vim'
 Plug '/usr/bin/fzf'
 call plug#end()
 
-"colorscheme heroku-terminal
-"colorscheme seoul256-light
-"colorscheme babymate256
-colorscheme default
-
-"source ~/.vim/ale.vim
-
-"let g:ycm_rust_src_path = '/home/glenn/rust-source/rust/src'
-"nnoremap gd :YcmCompleter GoToDefinition
-
 """""""""""""""" coc.nvim 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.

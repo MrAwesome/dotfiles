@@ -35,7 +35,8 @@ for filename_local in vim/* \
     xinitrc/* \
     Xdefaults/* \
     zsh/* \
-    shell_aliases/*
+    shell_aliases/* \
+    wezterm/*
 do
     echo "[$filename_local]"
 
