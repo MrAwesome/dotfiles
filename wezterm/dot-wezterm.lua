@@ -13,6 +13,11 @@ config.keys = {
 
 -- Mouse bindings
 config.mouse_bindings = {
+    {
+		event = { Down = { streak = 1, button = "Middle" } },
+		mods = "SHIFT",
+		action = act({ PasteFrom = "PrimarySelection" }),
+	},
 }
 
 -- Window padding

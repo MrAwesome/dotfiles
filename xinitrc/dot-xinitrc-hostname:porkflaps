@@ -46,6 +46,8 @@ fi
 
 udiskie -t &
 parcellite &
+arch-update --tray &
+
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK
 

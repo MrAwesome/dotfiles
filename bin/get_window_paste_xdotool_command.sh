@@ -21,7 +21,7 @@ is_qt=$(echo "$maps" | grep -oP 'libQt')
 # get the clipboard command
 
 if echo "$window" | grep -q wezterm; then
-    sleep .1
+    sleep .5
     xdotool getwindowfocus key --window %1 ctrl+shift+v
 elif [ -n "$is_gtk" ] || [ -n "$is_qt" ]; then
     #xsel -b -o
