@@ -74,9 +74,18 @@ done
 
 mkdir -p ~/bin
 
+echo "[bin/]"
 # TODO: log, abstract away
-ln -sf "${thisdir}/bin/get_window_paste_xdotool_command.sh" "${HOME}/bin/get_window_paste_xdotool_command.sh"
-ln -sf "${thisdir}/bin/weechat_tmux.sh" "${HOME}/bin/weechat_tmux.sh"
-ln -sf "${thisdir}/bin/pro_controller.sh" "${HOME}/bin/pro_controller.sh"
-ln -sf "${thisdir}/bin/startnv" "${HOME}/bin/startnv"
-ln -sf "${thisdir}/bin/startamd" "${HOME}/bin/startamd"
+for file in bin/*; do
+    linkname_full="${HOME}/${file}"
+    target_filename_full="${thisdir}/${file}"
+    echo "  $linkname_full ->"
+    echo "     $target_filename_full"
+
+    ln -sf "$target_filename_full" "$linkname_full"
+done
+#ln -sf "${thisdir}/bin/get_window_paste_xdotool_command.sh" "${HOME}/bin/get_window_paste_xdotool_command.sh"
+#ln -sf "${thisdir}/bin/weechat_tmux.sh" "${HOME}/bin/weechat_tmux.sh"
+#ln -sf "${thisdir}/bin/pro_controller.sh" "${HOME}/bin/pro_controller.sh"
+#ln -sf "${thisdir}/bin/startnv" "${HOME}/bin/startnv"
+#ln -sf "${thisdir}/bin/startamd" "${HOME}/bin/startamd"
