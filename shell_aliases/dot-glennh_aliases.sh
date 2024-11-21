@@ -123,7 +123,6 @@ installruwi () {
 }
 
 alias vr=vimruwi
-alias cdr='cd ~/code/ruwi'
 
 alias ct='cd ~/code/Liburry'
 lintaigi() {
@@ -151,11 +150,18 @@ alias deploytaigi='tt && (ct; export REACT_APP_LIBURRY_BUILD="chhataigi"; yarn b
 
 alias cdd='cd ~/code/decktricks'
 alias cddd='cd ~/code/decktricks/gui/godot'
+alias cddr='cd ~/code/decktricks/gui/rust'
 vimdeck() {
     cdd
     vim TODO src/*.rs src/*/*.rs tests/*/*.{rs,json} config.json Cargo.toml
 }
+vimdeckplus() {
+    cddr
+    vim src/*.rs ../../TODO ../../src/*.rs ../../src/*/*.rs ../../tests/*/*.{rs,json} ../../config.json ../../Cargo.toml
+}
 alias vd='vimdeck'
+alias vdd='cddd; vim scripts/Main.gd'
+alias vdr='vimdeckplus'
 decktricks() {
     (cdd && cargo run --quiet -- $*)
 }
@@ -231,11 +237,11 @@ ai() {
     yarn \
         --cwd="${SCRIPT_DIR}" \
         run -s ts-node \
-        "${SCRIPT_DIR}/src/index.ts" openai-completion $*
+        "${SCRIPT_DIR}/src/index.ts" openai-completion -m o1-mini $*
 }
 
 code() {
-    ai -M 4096 "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Instructions start now:
+    ai -m o1-mini -M 4096 "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Instructions start now:
 
 $*"
 }

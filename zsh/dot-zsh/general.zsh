@@ -6,9 +6,6 @@
 
 export EDITOR="vim"
 
-export ADMIN_SCRIPTS=/mnt/vol/engshare/admin/scripts
-[ -f "${ADMIN_SCRIPTS}/scm-prompt" ] && source "${ADMIN_SCRIPTS}/scm-prompt"
-
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=10000

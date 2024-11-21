@@ -1,6 +1,6 @@
 colorscheme default
 highlight Comment    cterm=italic
-highlight Function   cterm=bold
+highlight Function   cterm=bold,italic
 highlight Keyword    cterm=bold
 highlight Identifier cterm=NONE
 highlight String     cterm=italic
