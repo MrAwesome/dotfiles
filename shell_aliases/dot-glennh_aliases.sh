@@ -86,10 +86,10 @@ ddg() {
 }
 
 gcommit () {
-    git add -A && git commit -m "$1"
+    git add -A && git commit -m "$*"
 }
 gpush () {
-    git add -A && git commit -m "$1" && git push
+    git add -A && git commit -m "$*" && git push
 }
 alias gds='git diff --staged'
 
@@ -102,10 +102,10 @@ cdrustcargo () {
 }
 
 rustcargosearch () {
-    cdrustcargo && find . | rg '\.rs$' | xargs rg $*
+    cdrustcargo && find . | rg '\.rs$' | xargs rg "$@"
 }
 rustsearch () {
-    cdrust && find . | rg '\.rs$' | xargs rg $*
+    cdrust && find . | rg '\.rs$' | xargs rg "$@"
 }
 alias rcs='rustcargosearch '
 alias rs='rustsearch '
@@ -163,7 +163,7 @@ alias vd='vimdeck'
 alias vdd='cddd; vim scripts/Main.gd'
 alias vdr='vimdeckplus'
 decktricks() {
-    (cdd && cargo run --quiet -- $*)
+    (cdd && cargo run --quiet -- "$@")
 }
 
 alias wgup="sudo wg-quick up wg0"

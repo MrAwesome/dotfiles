@@ -135,7 +135,6 @@ nmap <Leader>w <C-W><C-W>
 nmap <Leader>z :ccl
 nmap <Leader>v :tabedit ~/.vim/general.vim<CR>
 nmap <Leader>V :source ~/.vimrc<CR>
-nmap <Leader>q @w
 
 " TODO: add a function which stores the last-visited tab in a variable, moves
 " to that
