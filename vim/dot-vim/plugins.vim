@@ -15,6 +15,7 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'junegunn/fzf.vim'
 "Plug 'github/copilot.vim'
 Plug '/usr/bin/fzf'
+Plug 'EdenEast/nightfox.nvim'
 call plug#end()
 
 """""""""""""""" coc.nvim 

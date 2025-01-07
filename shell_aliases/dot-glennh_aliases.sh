@@ -153,14 +153,14 @@ alias cddd='cd ~/code/decktricks/gui/godot'
 alias cddr='cd ~/code/decktricks/gui/rust'
 vimdeck() {
     cdd
-    vim TODO src/*.rs src/*/*.rs tests/*/*.{rs,json} config.json Cargo.toml
+    vim TODO src/*.rs src/*/*.rs build_assets/bin/* ci_scripts/*.sh scripts/*.sh .github/workflows/* tests/*/*.{rs,json} config.json Cargo.toml README.md CONTRIBUTING.md
 }
 vimdeckplus() {
     cddr
-    vim src/*.rs ../../TODO ../../src/*.rs ../../src/*/*.rs ../../tests/*/*.{rs,json} ../../config.json ../../Cargo.toml
+    vim src/*.rs tests/*.rs ../../TODO ../../src/*.rs ../../src/*/*.rs ../../tests/*/*.{rs,json} ../../config.json ../../Cargo.toml Cargo.toml
 }
 alias vd='vimdeck'
-alias vdd='cddd; vim scripts/Main.gd'
+alias vdd='cddd; vim scripts/Main.gd scripts/*.gd scenes/*.tscn'
 alias vdr='vimdeckplus'
 decktricks() {
     (cdd && cargo run --quiet -- "$@")
@@ -199,13 +199,13 @@ jsontocsv() {
 filesize() {
     if [[ "$*" == "" ]]; then
         # will only work in zsh
-        du -sh * | rg '^[0-9\.]+G'
+        du -sh ./* 2> /dev/null | rg '^[0-9\.]+G'
 
         if [ -n "$ZSH_VERSION" ]; then
-            du -sh .* | rg '^[0-9\.]+G'
+            du -sh .* 2> /dev/null | rg '^[0-9\.]+G'
         fi
     else
-        du -sh $* | rg '^[0-9\.]+G'
+        du -sh "$@" 2> /dev/null | rg '^[0-9\.]+G'
     fi
 }
 alias fs=filesize
@@ -237,7 +237,12 @@ ai() {
     yarn \
         --cwd="${SCRIPT_DIR}" \
         run -s ts-node \
-        "${SCRIPT_DIR}/src/index.ts" openai-completion -m o1-mini $*
+        "${SCRIPT_DIR}/src/index.ts" openai-completion -m o1-mini "The following prompt input is from a user who values brevity. If possible, avoid extraneous explanations and just give simple answers:
+
+    $*"
+
+    [[ -t 1 ]] && sleep .1
+    [[ -t 1 ]] && ~/bin/win_grab_attention.zsh
 }
 
 code() {

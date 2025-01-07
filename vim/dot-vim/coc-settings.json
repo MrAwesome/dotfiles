@@ -35,16 +35,16 @@
     "diagnostic.messageTarget": "float",
     "diagnostic.level": "information",
     "signature.enable": false,
-    "coc.preferences.snippets.enable": true,
+    //"coc.preferences.snippets.enable": true,
     "suggest.noselect": true,
     "suggest.enablePreselect": false,
-    "suggest.autotrigger": "trigger",
+    //"suggest.autotrigger": "trigger",
 
-    "rust-analyzer.check.command": "clippy",
-    "rust-analyzer.checkOnSave": true,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    //"rust-analyzer.checkOnSave": true,
     "python.linting.banditEnabled": true,
-    "eslint.packageManager": "yarn",
-    "eslint.formatter": "prettier",
+    //"eslint.packageManager": "yarn",
+    //"eslint.formatter": "prettier",
     "python.linting.banditArgs": ["--ini", ".bandit"],
 
     "inlayHint.enable": false
