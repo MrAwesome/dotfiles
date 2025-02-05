@@ -1,5 +1,5 @@
 " Remove trailing whitespace on save
-autocmd BufWritePre *.tw,*.rb,*.cconf,*.cinc,*.cpp,*.php,*.py :%s/\s\+$//e
+autocmd BufWritePre *.tw,*.rb,*.cconf,*.cinc,*.cpp,*.php,*.py,*.rs,*.gd :%s/\s\+$//e
 
 au BufNewFile,BufRead *.tw,*.py,*.cconf,*.mconf,*.cinc setlocal ft=python sw=4 ts=4 sts=4 et
 
@@ -9,6 +9,8 @@ au BufNewFile,BufRead *.php setlocal expandtab shiftwidth=2 softtabstop=2 tabsto
 au BufNewFile,BufRead *.js setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 au BufNewFile,BufRead *.c setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 au BufNewFile,BufRead *.yml setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
+
+au FileType gdscript setlocal noexpandtab tabstop=4 shiftwidth=4
 
 "autocmd FileType php setlocal iskeyword+=:,-
 

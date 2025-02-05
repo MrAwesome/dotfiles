@@ -4,7 +4,7 @@ if [ ! "$GIMPY_NVIDIA_MODE" = "" ]; then
     xrandr --setprovideroutputsource modesetting NVIDIA-0
     xrandr --auto
 fi
-#xrandr --dpi 288
+#xrandr --dpi 192
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap

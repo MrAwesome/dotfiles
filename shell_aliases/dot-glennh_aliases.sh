@@ -6,6 +6,8 @@ export PATH="$PATH:$HOME/.cargo/bin:$HOME/bin"
 export CONSOLE_BROWSER=elinks
 
 # Convenience functions for editing configs quickly
+alias vim=nvim
+alias oldvim=/usr/bin/vim
 alias vimvim='vim ~/.vim/plugins.vim ~/.vimrc ~/.vim/*.vim'
 alias val="vim ~/.glennh_aliases.sh && source ~/.glennh_aliases.sh"
 alias cdawesome="cd ~/.config/awesome/gimpy/"
@@ -237,7 +239,7 @@ ai() {
     yarn \
         --cwd="${SCRIPT_DIR}" \
         run -s ts-node \
-        "${SCRIPT_DIR}/src/index.ts" openai-completion -m o1-mini "The following prompt input is from a user who values brevity. If possible, avoid extraneous explanations and just give simple answers:
+        "${SCRIPT_DIR}/src/index.ts" openai-completion -m o3-mini "The following prompt input is from a user who values brevity. If possible, avoid extraneous explanations and just give simple answers:
 
     $*"
 
@@ -246,9 +248,13 @@ ai() {
 }
 
 code() {
-    ai -m o1-mini -M 4096 "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Instructions start now:
+    SCRIPT_DIR="${HOME}/code/openai-cli"
+    yarn \
+        --cwd="${SCRIPT_DIR}" \
+        run -s ts-node \
+        "${SCRIPT_DIR}/src/index.ts" openai-completion -M 8192 -m o3-mini "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Only return code. Take your time to reason and write high-quality code. The user values brevity, but only when it does not come at the expense of correctness. So be brief, but above all be correct. Instructions start now:
 
-$*"
+    $*"
 }
 
 gen_unit_tests() {

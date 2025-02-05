@@ -1,5 +1,5 @@
 if has("nvim")
-    colorscheme dawnfox
+    colorscheme nightfox
     highlight Comment    gui=italic
     highlight Function   gui=bold,italic
     highlight Keyword    gui=bold
