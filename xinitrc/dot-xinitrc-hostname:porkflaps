@@ -54,7 +54,7 @@ export SSH_AUTH_SOCK
 xrdb -merge ~/.Xresources &
 xrdb -merge ~/.Xdefaults &
 
-xinput --set-prop "DELL Alienware 610M" 'libinput Accel Speed' -1 &
+#xinput --set-prop "DELL Alienware 610M" 'libinput Accel Speed' -1 &
 xhidecursor &
 
 fc-cache -fv &

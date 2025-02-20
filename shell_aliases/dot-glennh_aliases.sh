@@ -15,7 +15,7 @@ alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
 
 
 alias webshare="ip addr show | rg inet.192; php -S 0.0.0.0:6969"
-alias moonshine="cd ~/code/moonshine && cargo run --release -- config.toml"
+alias moonshine="cd ~/code/moonshine && while :; do cargo run --release -- config.toml; sleep 10; done"
 
 if command -v yarnpkg &>/dev/null; then
     alias yarn=yarnpkg
@@ -239,7 +239,10 @@ ai() {
     yarn \
         --cwd="${SCRIPT_DIR}" \
         run -s ts-node \
-        "${SCRIPT_DIR}/src/index.ts" openai-completion -m o3-mini "The following prompt input is from a user who values brevity. If possible, avoid extraneous explanations and just give simple answers:
+        "${SCRIPT_DIR}/src/index.ts" \
+        openai-completion \
+        -m o3-mini \
+        "The following prompt input is from a user who values clarity and brevity. You can give full answers, but don't pontificate. User input starts below:
 
     $*"
 
@@ -252,7 +255,11 @@ code() {
     yarn \
         --cwd="${SCRIPT_DIR}" \
         run -s ts-node \
-        "${SCRIPT_DIR}/src/index.ts" openai-completion -M 8192 -m o3-mini "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Only return code. Take your time to reason and write high-quality code. The user values brevity, but only when it does not come at the expense of correctness. So be brief, but above all be correct. Instructions start now:
+        "${SCRIPT_DIR}/src/index.ts" \
+        openai-completion \
+        -M 8192 \
+        -m o3-mini \
+        "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Only return code. Take your time to reason and write high-quality code. The user values brevity, but only when it does not come at the expense of correctness. So be brief, but above all be correct. Instructions start now:
 
     $*"
 }
