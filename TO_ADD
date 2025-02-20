@@ -1,3 +1,4 @@
+===
 /etc/X11/xorg.conf.d/00-keyboard.conf
 
 Section "InputClass"
@@ -8,6 +9,7 @@ Section "InputClass"
 EndSection
 
 
+===
 /etc/X11/xorg.conf.d/40-libinput.conf
 
 Section "InputClass"
@@ -17,6 +19,7 @@ Section "InputClass"
 EndSection
 
 
+===
 /etc/X11/xorg.conf.d/50-alienware.conf
 
 Section "InputClass"
@@ -24,4 +27,54 @@ Section "InputClass"
     MatchProduct "DELL Alienware 610M"
     Driver "libinput"
     Option "AccelSpeed" "-1"
+EndSection
+
+===
+/etc/X11/xorg.conf.nvidia
+
+# This xorg.conf file is set to run everything on the NVIDIA GPU on a single screen
+
+Section "ServerLayout"
+    Identifier     "layout"
+    Screen      0  "nvidia"
+    Inactive       "amdgpu"
+EndSection
+
+Section "Device"
+    Identifier     "nvidia"
+    Driver         "nvidia"
+    BusID          "PCI:1:0:0"
+EndSection
+
+Section "Screen"
+    Identifier     "nvidia"
+    Device         "nvidia"
+    Option         "AllowEmptyInitialConfiguration" "on"
+    Option         "UseDisplayDevice" "none"
+EndSection
+
+Section "Device"
+    Identifier     "amdgpu"
+    Driver         "amdgpu"
+EndSection
+
+Section "Screen"
+    Identifier     "amdgpu"
+    Device         "amdgpu"
+EndSection
+
+Section "OutputClass"
+    Identifier "amdgpu"
+    #MatchDriver "i915"
+    Driver "amdgpu"
+EndSection
+
+Section "OutputClass"
+    Identifier "nvidia"
+    MatchDriver "nvidia-drm"
+    Driver "nvidia"
+    Option "AllowEmptyInitialConfiguration"
+    Option "PrimaryGPU" "yes"
+    ModulePath "/usr/lib/nvidia/xorg"
+    ModulePath "/usr/lib/xorg/modules"
 EndSection
