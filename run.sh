@@ -29,6 +29,13 @@ echo "${HOME}/.config/tmux/tmux.conf ->
     ${thisdir}/config/tmux/tmux.conf"
 echo
 
+mkdir -p "${HOME}/.config/nvim"
+ln -snf "${thisdir}/config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
+echo "[config/nvim/init.vim]"
+echo "${HOME}/.config/nvim/init.vim ->
+    ${thisdir}/config/nvim/init.vim"
+echo
+
 
 # Unfortunately, --dotfiles is broken for directories with stow, so do this by hand until you find a suitable replacement
 for filename_local in vim/* \
