@@ -5,6 +5,8 @@ export PATH="$PATH:$HOME/.cargo/bin:$HOME/bin"
 
 export CONSOLE_BROWSER=elinks
 
+alias moutn=mount # lmao
+
 # Convenience functions for editing configs quickly
 alias vim=nvim
 alias oldvim=/usr/bin/vim
@@ -13,6 +15,7 @@ alias val="vim ~/.glennh_aliases.sh && source ~/.glennh_aliases.sh"
 alias cdawesome="cd ~/.config/awesome/gimpy/"
 alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
 
+alias kf="killall firefox"
 
 alias webshare="ip addr show | rg inet.192; php -S 0.0.0.0:6969"
 alias moonshine="cd ~/code/moonshine && while :; do cargo run --release -- config.toml; sleep 10; done"
@@ -150,9 +153,12 @@ alias ttt='ct; yarn test --color'
 
 alias deploytaigi='tt && (ct; export REACT_APP_LIBURRY_BUILD="chhataigi"; yarn build) && echo y | gcloud app deploy --project chhataigi'
 
+alias cdp='cd ~/code/playground'
+
 alias cdd='cd ~/code/decktricks'
-alias cddd='cd ~/code/decktricks/gui/godot'
+alias cddg='cd ~/code/decktricks/gui/godot'
 alias cddr='cd ~/code/decktricks/gui/rust'
+alias cddw='cd ~/code/decktricks-website'
 vimdeck() {
     cdd
     vim TODO src/*.rs src/*/*.rs build_assets/bin/* ci_scripts/*.sh scripts/*.sh .github/workflows/* tests/*/*.{rs,json} config.json Cargo.toml README.md CONTRIBUTING.md
@@ -162,7 +168,7 @@ vimdeckplus() {
     vim src/*.rs tests/*.rs ../../TODO ../../src/*.rs ../../src/*/*.rs ../../tests/*/*.{rs,json} ../../config.json ../../Cargo.toml Cargo.toml
 }
 alias vd='vimdeck'
-alias vdd='cddd; vim scripts/Main.gd scripts/*.gd scenes/*.tscn'
+alias vdg='cddg; vim scripts/Main.gd scripts/*.gd scenes/*.tscn'
 alias vdr='vimdeckplus'
 decktricks() {
     (cdd && cargo run --quiet -- "$@")
@@ -235,16 +241,30 @@ latlong() {
 }
 
 ai() {
+    # Stealing -p for prefix since it's easier to type
+    if [[ "$1" == "-p" ]]; then
+        prompt_override="$2"
+        shift; shift
+
+        if [[ "$1" == "" ]]; then
+            prompt_prefix="$*"
+        else
+            prompt_prefix="$prompt_override"
+        fi
+    else
+        prompt_prefix="The following prompt input is from a user who values clarity and brevity. You can give full answers, but don't pontificate. User input starts below the following three dash marks:
+---
+"
+    fi
+
     SCRIPT_DIR="${HOME}/code/openai-cli"
     yarn \
         --cwd="${SCRIPT_DIR}" \
         run -s ts-node \
         "${SCRIPT_DIR}/src/index.ts" \
         openai-completion \
-        -m o3-mini \
-        "The following prompt input is from a user who values clarity and brevity. You can give full answers, but don't pontificate. User input starts below:
-
-    $*"
+        --prompt-prefix "$prompt_prefix" \
+        "$@"
 
     [[ -t 1 ]] && sleep .1
     [[ -t 1 ]] && ~/bin/win_grab_attention.zsh
@@ -258,55 +278,27 @@ code() {
         "${SCRIPT_DIR}/src/index.ts" \
         openai-completion \
         -M 8192 \
-        -m o3-mini \
-        "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Only return code. Take your time to reason and write high-quality code. The user values brevity, but only when it does not come at the expense of correctness. So be brief, but above all be correct. Instructions start now:
+        --prompt-prefix "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Only return code. Take your time to reason and write high-quality code. The user values brevity, but only when it does not come at the expense of correctness. So be brief, but above all be correct. 
 
-    $*"
-}
+Instructions start below the 3 dash marks on the following line:
+---
+" \
+    "$@" | sed '1{/^```/d};$ {/^```/d}'
 
-gen_unit_tests() {
-    filename="$1"
-    test_filename="${filename%.*}.test.ts"
 
-    file_contents=""
-    if [[ -f "${test_filename}" ]]; then
-        file_contents=$(cat "${test_filename}")
-    fi
-
-    #-m 'code-davinci-002' \
-    ai -M 1500 \
-        -m 'text-davinci-003' \
-        -f "${filename}" \
-        --prompt-prefix "// Path: ${filename}" \
-        --prompt-suffix "// Path: ${test_filename}
-// Generate a typescript test file with unit tests for ${filename}, using the 'jest' library.
-// Generate at least 20 test cases.
-// Use the 'test.each' function to generate test cases (the 'data provider' pattern).
-// Be thorough. Test all the edge cases you can think of. Do not generate any other files, just this test file.
-
-${file_contents}" \
-        >> "${test_filename}"
 }
 
 bp() {(
     cd ~/code/bp-monitor || exit
-    ts-node src/index.ts $*
+    ts-node src/index.ts "$@"
 )}
 
 yarninit() {
     mkdir -p src/
-    yarn add ts-node typescript $*
+    yarn add ts-node typescript "$@"
     yarn add --dev @types/node
     #yarn add -D @types/node eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier
     touch src/index.ts
-}
-
-gpt4() {
-    SCRIPT_DIR="${HOME}/code/openai-cli"
-    yarn \
-        --cwd="${SCRIPT_DIR}" \
-        run -s ts-node \
-        ${SCRIPT_DIR}/misc/testGPT4.ts $*
 }
 
 ca() {
@@ -321,7 +313,7 @@ va() {
 }
 
 ntfs_rsync() {
-    rsync --progress -P -rDvz $*
+    rsync --progress -P -rDvz "$@"
 }
 
 mw() {

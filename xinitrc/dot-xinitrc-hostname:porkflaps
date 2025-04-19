@@ -44,6 +44,7 @@ if [ "$NO_REDSHIFT" = "" ]; then
     #redshift &
 fi
 
+1password --silent &
 udiskie -t &
 parcellite &
 arch-update --tray &

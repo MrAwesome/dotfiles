@@ -1,3 +1,4 @@
+inoremap jk <ESC>
 " nmap <Leader>m :make check --all-targets<CR><CR><CR>
 
 "nmap <Leader>M :!reset && cargo test<CR>
