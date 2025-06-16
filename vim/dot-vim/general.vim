@@ -164,7 +164,7 @@ nmap gw <C-W><C-W>
 nmap <F7> :set invspell<ESC>
 nmap <F8> 1z=
 
-set pastetoggle=<F10>
+"set pastetoggle=<F10>
 
 nmap <up> gk
 nmap <down> gj

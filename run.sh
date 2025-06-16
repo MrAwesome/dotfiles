@@ -9,6 +9,8 @@ set -euo pipefail
 thisdir="$(cd "$(dirname "$0")" && pwd)"
 cd "$thisdir"
 
+command -v rg || sudo pacman -S ripgrep
+
 #progs=$(cat active_progs.txt)
 
 # See .gitignore for ignored files

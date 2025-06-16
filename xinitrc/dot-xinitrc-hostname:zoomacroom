@@ -1,0 +1,14 @@
+1password --silent &
+# udiskie -t &
+parcellite &
+# arch-update --tray &
+
+# eval $(gnome-keyring-daemon --start)
+# export SSH_AUTH_SOCK
+
+xrdb -merge ~/.Xresources &
+xrdb -merge ~/.Xdefaults &
+
+fc-cache -fv &
+
+exec /usr/bin/awesome -a >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
