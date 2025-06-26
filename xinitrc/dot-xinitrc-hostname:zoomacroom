@@ -1,6 +1,7 @@
 1password --silent &
 # udiskie -t &
 parcellite &
+xiccd &
 # arch-update --tray &
 
 # eval $(gnome-keyring-daemon --start)

@@ -301,11 +301,11 @@ yarninit() {
     touch src/index.ts
 }
 
-ca() {
+cai() {
     cd ~/code/openai-cli
 }
 
-va() {
+vai() {
     ca
     vim \
         src/index.ts \
@@ -316,6 +316,25 @@ ntfs_rsync() {
     rsync --progress -P -rDvz "$@"
 }
 
-mw() {
-    ~/syncthing/morrowind/run.sh
+get_porkflaps() {
+    if timeout 1 getent hosts porkflaps 1>&2; then
+        echo -n "porkflaps"
+    else
+        # TODO: match on /etc/localtime to pick a vpn
+        echo -n "10.8.0.8"
+    fi
+}
+
+sp() {
+    ssh "$(get_porkflaps)" "$@"
+}
+
+spcp() {
+    scp "$(get_porkflaps)":"$1" "$2"
+}
+
+dtlocal() {
+    sp -t 'zsh -ic "source ~/.glennh_aliases.sh && cddg && ./dev_build.sh"'
+    spcp 'code/decktricks/gui/godot/build/*' ~/code/builds/decktricks/
+    ~/code/builds/decktricks/decktricks-gui
 }
