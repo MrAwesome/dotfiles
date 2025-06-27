@@ -10,6 +10,7 @@ yay -S --needed --noconfirm --sudoloop \
     fzf \
     nvim \
     openssh \
+    rsync \
     signal-desktop \
     vesktop \
     xlockmore \

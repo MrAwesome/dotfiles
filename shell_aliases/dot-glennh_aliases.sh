@@ -334,7 +334,7 @@ spcp() {
 }
 
 dtlocal() {
-    sp -t 'zsh -ic "source ~/.glennh_aliases.sh && cddg && ./dev_build.sh"'
-    spcp 'code/decktricks/gui/godot/build/*' ~/code/builds/decktricks/
+    sp -t 'zsh -ic "source ~/.glennh_aliases.sh && cddg && ./dev_build.sh"' &&
+    ntfs_rsync "$(get_porkflaps)":'code/decktricks/gui/godot/build/' ~/code/builds/decktricks/ &&
     ~/code/builds/decktricks/decktricks-gui
 }
