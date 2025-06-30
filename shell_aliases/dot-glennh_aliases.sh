@@ -338,3 +338,16 @@ dtlocal() {
     ntfs_rsync "$(get_porkflaps)":'code/decktricks/gui/godot/build/' ~/code/builds/decktricks/ &&
     ~/code/builds/decktricks/decktricks-gui
 }
+
+getsteamdeck() {
+    if timeout 1 getent hosts steamdeck 1>&2; then
+        echo -n "steamdeck"
+    else
+        # TODO: match on /etc/localtime to pick a vpn
+        echo -n "10.8.0.64"
+    fi
+}
+
+sshdeck() {
+    ssh deck@"$(getsteamdeck)" "$@"
+}

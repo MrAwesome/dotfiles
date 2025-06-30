@@ -6,6 +6,7 @@ command -v yay || ( sudo pacman -S --needed git base-devel && git clone https://
 
 yay -S --needed --noconfirm --sudoloop \
     1password \
+    7zip \
     firefox \
     fzf \
     nvim \
@@ -13,6 +14,7 @@ yay -S --needed --noconfirm --sudoloop \
     rsync \
     signal-desktop \
     vesktop \
+    unzip \
     xlockmore \
     xsel \
     wireguard-tools
