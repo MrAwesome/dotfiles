@@ -60,4 +60,6 @@ xhidecursor &
 
 fc-cache -fv &
 
+supergfxctl -m Hybrid &
+
 exec /usr/bin/awesome -a >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr

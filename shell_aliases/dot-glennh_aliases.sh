@@ -18,7 +18,7 @@ alias vimawesome="cd ~/.config/awesome/gimpy/ && vim *.lua"
 alias kf="killall firefox"
 
 alias webshare="ip addr show | rg inet.192; php -S 0.0.0.0:6969"
-alias moonshine="cd ~/code/moonshine && while :; do cargo run --release -- config.toml; sleep 10; done"
+alias moonshine="cd ~/code/moonshine && while :; do git pull; cargo run --release -- config.toml; sleep 10; done"
 
 if command -v yarnpkg &>/dev/null; then
     alias yarn=yarnpkg
@@ -154,6 +154,7 @@ alias ttt='ct; yarn test --color'
 alias deploytaigi='tt && (ct; export REACT_APP_LIBURRY_BUILD="chhataigi"; yarn build) && echo y | gcloud app deploy --project chhataigi'
 
 alias cdp='cd ~/code/playground'
+alias vp='cdp && vim src/main.rs'
 
 alias cdd='cd ~/code/decktricks'
 alias cddg='cd ~/code/decktricks/gui/godot'
