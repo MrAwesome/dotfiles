@@ -318,6 +318,7 @@ ntfs_rsync() {
 }
 
 get_porkflaps() {
+    # NOTE: if you have trouble resolving, check /etc/hosts
     if timeout 1 getent hosts porkflaps 1>&2; then
         echo -n "porkflaps"
     else

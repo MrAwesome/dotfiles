@@ -8,6 +8,7 @@ bindkey -M viins "^L" clear-screen
 bindkey -M viins "^A" beginning-of-line
 bindkey -M viins "^E" end-of-line
 bindkey -M viins "^W" backward-kill-word
+bindkey -M viins "\ed" kill-word
 bindkey -M viins "^U" backward-kill-line
 bindkey -M viins "^K" vi-kill-eol
 bindkey -M viins "^R" history-incremental-search-backward
