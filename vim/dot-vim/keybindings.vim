@@ -3,8 +3,8 @@ inoremap jk <ESC>
 
 "nmap <Leader>M :!reset && cargo test<CR>
 nmap <Leader>b :!cd ~/code/decktricks/gui/rust && cargo build && cd ../godot && godot<CR>
-nmap <Leader>r :!reset && RUST_BACKTRACE=1 cargo run<CR>
-nmap <Leader>R :!reset && RUST_BACKTRACE=1 cargo run --release<CR>
+nmap <Leader>r :!RUST_BACKTRACE=1 cargo run<CR>
+nmap <Leader>R :!RUST_BACKTRACE=1 cargo run --release<CR>
 nmap <Leader>c <ESC>:make clippy --all-targets -- -D clippy::pedantic<CR>
 nmap <Leader>C <ESC>:!reset && cargo clippy --all-targets -- -D clippy::pedantic<CR>
 nmap <Leader>d yiwodbg!(&<ESC>pA);<ESC><CR>

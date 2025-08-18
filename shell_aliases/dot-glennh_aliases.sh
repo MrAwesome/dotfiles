@@ -166,7 +166,7 @@ vimdeck() {
 }
 vimdeckplus() {
     cddr
-    vim src/*.rs tests/*.rs ../../TODO ../../src/*.rs ../../src/*/*.rs ../../tests/*/*.{rs,json} ../../config.json ../../Cargo.toml Cargo.toml
+    vim src/dispatcher.rs src/*.rs tests/*.rs ../../TODO ../../src/*.rs ../../src/*/*.rs ../../tests/*/*.{rs,json} ../../config.json ../../Cargo.toml Cargo.toml
 }
 alias vd='vimdeck'
 alias vdg='cddg; vim scripts/Main.gd scripts/*.gd scenes/*.tscn'
@@ -351,4 +351,15 @@ getsteamdeck() {
 
 sshdeck() {
     ssh deck@"$(getsteamdeck)" "$@"
+}
+
+rtmfix() {
+    prefix="$(cat .rtm_shared_secret)"
+
+    cleaned="$(echo -n "$1" | sed 's/api_sig=\w*//')"
+    suffix="$(echo -n "$1" | sed 's/^https.*?//' | tr -d '&=')"
+
+    api_sig=$(echo -n "${prefix}${suffix}" | md5sum | awk '{ print $1; }')
+
+    echo "${cleaned}&api_sig=${api_sig}"
 }
