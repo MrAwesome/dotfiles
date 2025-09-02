@@ -253,7 +253,7 @@ ai() {
             prompt_prefix="$prompt_override"
         fi
     else
-        prompt_prefix="The following prompt input is from a user who values clarity and brevity. You can give full answers, but don't pontificate. User input starts below the following three dash marks:
+        prompt_prefix="The following prompt input is from a user who values clarity and brevity. You can give full answers, but don't pontificate. This is from a once-off command line program, so do not ask for follow-up engagement. Just answer to the best of your ability. User input starts below the following three dash marks:
 ---
 "
     fi
