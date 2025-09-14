@@ -74,11 +74,17 @@ hcat () {
 }
 
 cargnew() {
-    if [ ! -d "$_" ]; then
-        cargo new --lib $*
+    flag="--lib"
+    if [[ "$1" == "--bin" ]]; then
+        flag="$1"
+        shift
+    fi
+
+    if [[ ! -d "$_" ]]; then
+        cargo new "$flag" $*
     fi
     cd $_
-    vim -O src/main.rs src/lib.rs
+    vim src/main.rs src/lib.rs
 }
 
 alias brite='sudo brightness.sh'
@@ -328,7 +334,7 @@ get_porkflaps() {
 }
 
 sp() {
-    ssh "$(get_porkflaps)" "$@"
+    ssh -t "$(get_porkflaps)" "$@"
 }
 
 spcp() {
