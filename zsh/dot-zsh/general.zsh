@@ -4,14 +4,17 @@
 # functions, options, key bindings, etc.
 #
 
-export EDITOR="vim"
+if command -v nvim &> /dev/null; then
+    export EDITOR="nvim"
+else
+    export EDITOR="vim"
+fi
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=10000
+HISTSIZE=50000
+SAVEHIST=50000
 HISTORY_IGNORE="(ls|cd|pwd|exit|cd|k|j)"
-SAVEHIST=10000
-setopt appendhistory
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 #setopt SHARE_HISTORY
@@ -20,7 +23,7 @@ setopt INC_APPEND_HISTORY
 
 ## never ever beep ever
 setopt NO_BEEP
-unsetopt beep
+unsetopt BEEP
 
 # vim mode
 bindkey -v
@@ -41,7 +44,7 @@ bashcompinit -i
 #setopt COMPLETE_IN_WORD
 
 ## keep background processes at full speed
-setopt NOBGNICE
+unsetopt BG_NICE
 
 ## automatically decide when to page a list of completions
 LISTMAX=0
@@ -72,4 +75,4 @@ export PROMPT='%F{yellow}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{yellow}]%F{yellow}[%F{
 #%f%B$%b '
 
 # Real comments
-setopt interactivecomments
+setopt INTERACTIVE_COMMENTS

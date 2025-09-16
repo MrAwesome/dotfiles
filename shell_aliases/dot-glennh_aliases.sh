@@ -370,3 +370,5 @@ rtmfix() {
 
     echo "${cleaned}&api_sig=${api_sig}"
 }
+
+alias gsutil='python3 /opt/google-cloud-cli/platform/gsutil/gsutil.py '

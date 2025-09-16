@@ -33,6 +33,7 @@ echo
 
 mkdir -p "${HOME}/.config/nvim"
 ln -snf "${thisdir}/config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
+ln -snf "${thisdir}/config/nvim/lua/" "${HOME}/.config/nvim/lua"
 echo "[config/nvim/init.vim]"
 echo "${HOME}/.config/nvim/init.vim ->
     ${thisdir}/config/nvim/init.vim"

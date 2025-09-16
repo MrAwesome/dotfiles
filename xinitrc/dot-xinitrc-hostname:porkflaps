@@ -46,6 +46,12 @@ if [[ "$GIMPY_EMPTY_WM" == "1" ]]; then
     exit 0
 fi
 
+if [[ "$GIMPY_STREAMING_WM" == "1" ]]; then
+    ( sleep 3; systemctl start --user sunshine ) &
+    exec urxvt
+    exit 0
+fi
+
 if [[ "$GIMPY_NO_STARTUP" != "1" ]]; then
     if [[ "$GIMPY_REDSHIFT" == "1" ]]; then
         redshift &
@@ -64,6 +70,6 @@ fi
 
 #supergfxctl -m Hybrid &
 
-exec /usr/bin/awesome -a >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+exec /usr/bin/awesome -a >> ~/.cache/awesome/"stdout-display${DISPLAY}" 2>> ~/.cache/awesome/"stderr-display${DISPLAY}"
 
 # vim: ft=bash
