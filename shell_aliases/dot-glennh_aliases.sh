@@ -168,11 +168,11 @@ alias cddr='cd ~/code/decktricks/gui/rust'
 alias cddw='cd ~/code/decktricks-website'
 vimdeck() {
     cdd
-    vim TODO src/*.rs src/*/*.rs build_assets/bin/* ci_scripts/*.sh scripts/*.sh .github/workflows/* tests/*/*.{rs,json} config.json Cargo.toml README.md CONTRIBUTING.md
+    vim TODO src/*.rs src/*/*.rs build_assets/bin/* ci_scripts/*.sh scripts/*.sh .github/workflows/* tests/*/*.{rs,json} config.json Cargo.toml README.md CONTRIBUTING.md "$@"
 }
 vimdeckplus() {
     cddr
-    vim src/dispatcher.rs src/*.rs tests/*.rs ../../TODO ../../src/*.rs ../../src/*/*.rs ../../tests/*/*.{rs,json} ../../config.json ../../Cargo.toml Cargo.toml
+    vim src/dispatcher.rs src/*.rs tests/*.rs ../../TODO ../../src/*.rs ../../src/*/*.rs ../../tests/*/*.{rs,json} ../../config.json ../../Cargo.toml Cargo.toml "$@"
 }
 alias vd='vimdeck'
 alias vdg='cddg; vim scripts/Main.gd scripts/*.gd scenes/*.tscn'
@@ -247,6 +247,12 @@ latlong() {
     echo "$resp" | jq -r '.items[0] | (.access[0] // .position) | [.lat, .lng] | @csv'
 }
 
+ainano() {
+    ai -m gpt-5-nano "$@"
+}
+aifull() {
+    ai -m gpt-5 "$@"
+}
 ai() {
     # Stealing -p for prefix since it's easier to type
     if [[ "$1" == "-p" ]]; then
