@@ -2,6 +2,7 @@ export ANDROID_SDK_ROOT="/home/glenn/Android/Sdk"
 export ANDROID_HOME="/home/glenn/Android/Sdk"
 #export ANDROID_HOME="/opt/android-sdk"
 export PATH="$PATH:$HOME/.cargo/bin:$HOME/bin"
+export PYTHON_BASIC_REPL=1
 
 export CONSOLE_BROWSER=elinks
 
@@ -247,8 +248,8 @@ latlong() {
     echo "$resp" | jq -r '.items[0] | (.access[0] // .position) | [.lat, .lng] | @csv'
 }
 
-ainano() {
-    ai -m gpt-5-nano "$@"
+aifast() {
+    ai -m gpt-4o "$@"
 }
 aifull() {
     ai -m gpt-5 "$@"
@@ -386,3 +387,22 @@ rtmfix() {
 }
 
 alias gsutil='python3 /opt/google-cloud-cli/platform/gsutil/gsutil.py '
+
+new_aws() {
+    ip_reg='([0-9]{1,3}\.){3}[0-9]{1,3}'
+    new_ip="$1"
+    if [[ -z "$new_ip" ]]; then
+        if xsel | grep -qE "$ip_reg"; then
+            new_ip=$(xsel | grep -Eo "$ip_reg" | head -n 1)
+        else
+            echo "Either pass or copy to clipboard a valid IPv4 address."
+            return 1
+        fi
+    fi
+    sed -i'' -E 's/(\s*)[0-9].*(\s#AWSHOSTNAME)/\1'"$new_ip"'\2/' ~/.ssh/config 
+}
+
+forex() {
+    input="$(echo "$*" | tr '[:lower:]' '[:upper:]')"
+    units --terse -o '%.2f' "$input" "USD"
+}

@@ -42,7 +42,7 @@ xrdb -merge ~/.Xresources &
 xrdb -merge ~/.Xdefaults &
 
 if [[ "$GIMPY_EMPTY_WM" == "1" ]]; then
-    exec sleep infinity
+    exec ~/code/glennwm/glennwm
     exit 0
 fi
 
