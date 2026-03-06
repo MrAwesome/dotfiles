@@ -292,7 +292,11 @@ code() {
         "${SCRIPT_DIR}/src/index.ts" \
         openai-completion \
         -M 8192 \
-        --prompt-prefix "The following instructions are from a command-line program on Arch Linux. The user wants only code results. Do *not* wrap code in triple backticks. Do *not* give any explanations at all. Just code. Only return code. Take your time to reason and write high-quality code. The user values brevity, but only when it does not come at the expense of correctness. So be brief, but above all be correct. 
+        --prompt-prefix "The following instructions are from a command-line program on Arch Linux. 
+
+No markdown, no code fences, no explanation, no extra fields, no intro or trailing commentary.
+
+The user wants only code results. Do *not* return the code wrapped in triple backticks. Plain text, not Markdown.
 
 Instructions start below the 3 dash marks on the following line:
 ---
@@ -337,7 +341,9 @@ get_host() {
     # return
 
     # NOTE: if you have trouble resolving, check /etc/hosts
-    if timeout 1 getent hosts "$host" 1>&2; then
+    if timeout 1 getent hosts "$host".local 1>&2; then
+        echo -n "$host".local
+    elif timeout 1 getent hosts "$host" 1>&2; then
         echo -n "$host"
     else
         if [[ "$host" == "porkflaps" ]]; then
@@ -349,6 +355,10 @@ get_host() {
             fi
         fi
     fi
+}
+
+meee() {
+    cat
 }
 
 sp() {
