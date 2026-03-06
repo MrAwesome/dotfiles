@@ -330,14 +330,15 @@ ntfs_rsync() {
     rsync --progress -P -rDvz "$@"
 }
 
-get_porkflaps() {
+get_host() {
+    host="$1"
     # Temporarily just return zavpn address because of dns issues
     # echo -n "10.9.0.8"
     # return
 
     # NOTE: if you have trouble resolving, check /etc/hosts
-    if timeout 1 getent hosts porkflaps 1>&2; then
-        echo -n "porkflaps"
+    if timeout 1 getent hosts "$host" 1>&2; then
+        echo -n "$host"
     else
         # TODO: match on /etc/localtime to pick a vpn
         if readlink /etc/localtime | rg -q "Johann"; then
@@ -349,11 +350,19 @@ get_porkflaps() {
 }
 
 sp() {
-    ssh -t "$(get_porkflaps)" "$@"
+    ssh -t "$(get_host porkflaps)" "$@"
 }
 
 spcp() {
-    scp "$(get_porkflaps)":"$1" "$2"
+    scp "$(get_host porkflaps)":"$1" "$2"
+}
+
+sz() {
+    ssh -t "$(get_host zoomacroom)" "$@"
+}
+
+szcp() {
+    scp "$(get_host zoomacroom)":"$1" "$2"
 }
 
 dtlocal() {
