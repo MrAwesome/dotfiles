@@ -340,11 +340,13 @@ get_host() {
     if timeout 1 getent hosts "$host" 1>&2; then
         echo -n "$host"
     else
-        # TODO: match on /etc/localtime to pick a vpn
-        if readlink /etc/localtime | rg -q "Johann"; then
-            echo -n "10.9.0.8"
-        else
-            echo -n "10.8.0.8"
+        if [[ "$host" == "porkflaps" ]]; then
+            # TODO: match on /etc/localtime to pick a vpn
+            if readlink /etc/localtime | rg -q "Johann"; then
+                echo -n "10.9.0.8"
+            else
+                echo -n "10.8.0.8"
+            fi
         fi
     fi
 }
