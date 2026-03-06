@@ -339,15 +339,23 @@ get_host() {
     # Temporarily just return zavpn address because of dns issues
     # echo -n "10.9.0.8"
     # return
+    #
+
+    if [[ -f ~/.tailscale_suffix ]]; then
+        tailscale_suffix=$(cat ~/.tailscale_suffix)
+    else
+        tailscale_suffix=""
+    fi
 
     # NOTE: if you have trouble resolving, check /etc/hosts
-    if timeout 1 getent hosts "$host".local 1>&2; then
+    if [[ "$tailscale_suffix" != "" ]] && timeout 1 getent hosts "$host"."$tailscale_suffix" 1>&2; then
+        echo -n "$host"."$tailscale_suffix"
+    elif timeout 1 getent hosts "$host".local 1>&2; then
         echo -n "$host".local
     elif timeout 1 getent hosts "$host" 1>&2; then
         echo -n "$host"
     else
         if [[ "$host" == "porkflaps" ]]; then
-            # TODO: match on /etc/localtime to pick a vpn
             if readlink /etc/localtime | rg -q "Johann"; then
                 echo -n "10.9.0.8"
             else
