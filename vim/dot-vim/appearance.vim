@@ -1,5 +1,5 @@
 if has("nvim")
-    colorscheme nightfox
+    colorscheme dayfox
     highlight Operator    gui=bold
     highlight Statement   gui=bold
     highlight Conditional gui=bold

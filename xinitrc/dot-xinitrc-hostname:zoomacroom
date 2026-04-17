@@ -1,16 +1,22 @@
 #!/bin/bash
 
+xrandr --dpi 192
+xrdb -merge ~/.Xdefaults
+xrdb -merge ~/.Xresources
+~/bin/autorotate_screen.sh &
+
+ydotoold &
+touchegg &
+
+picom &
 1password --silent &
 # udiskie -t &
 parcellite &
-xiccd &
+#xiccd &
 # arch-update --tray &
 
 # eval $(gnome-keyring-daemon --start)
 # export SSH_AUTH_SOCK
-
-xrdb -merge ~/.Xresources &
-xrdb -merge ~/.Xdefaults &
 
 fc-cache -fv &
 

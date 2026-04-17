@@ -10,6 +10,7 @@ alias moutn=mount # lmao
 
 # Convenience functions for editing configs quickly
 alias vim=nvim
+alias novim="vim --cmd 'let g:coc_start_at_startup = 0'"
 alias oldvim=/usr/bin/vim
 alias vimvim='vim ~/.vim/plugins.vim ~/.vimrc ~/.vim/*.vim'
 alias val="vim ~/.glennh_aliases.sh && source ~/.glennh_aliases.sh"
@@ -284,6 +285,25 @@ ai() {
     [[ -t 1 ]] && ~/bin/win_grab_attention.zsh
 }
 
+ainone() {
+    SCRIPT_DIR="${HOME}/code/openai-cli"
+    yarn \
+        --cwd="${SCRIPT_DIR}" \
+        run -s ts-node \
+        "${SCRIPT_DIR}/src/index.ts" \
+        openai-completion \
+        "$@"
+}
+
+aiother() {
+    SCRIPT_DIR="${HOME}/code/openai-cli"
+    yarn \
+        --cwd="${SCRIPT_DIR}" \
+        run -s ts-node \
+        "${SCRIPT_DIR}/src/index.ts" \
+        "$@"
+}
+
 code() {
     SCRIPT_DIR="${HOME}/code/openai-cli"
     yarn \
@@ -336,32 +356,24 @@ ntfs_rsync() {
 
 get_host() {
     host="$1"
-    # Temporarily just return zavpn address because of dns issues
-    # echo -n "10.9.0.8"
-    # return
-    #
+    dbg=1
 
+    timeout .2 ping -c 1 "${host}.local" &>/dev/null && echo -n "${host}.local" && return 0
     if [[ -f ~/.tailscale_suffix ]]; then
-        tailscale_suffix=$(cat ~/.tailscale_suffix)
-    else
-        tailscale_suffix=""
+        tailscale_suffix="$(cat ~/.tailscale_suffix)"
+        timeout .2 ping -c 1 "${host}.${tailscale_suffix}" &>/dev/null && echo -n "${host}.${tailscale_suffix}" && return 0
     fi
 
-    # NOTE: if you have trouble resolving, check /etc/hosts
-    if [[ "$tailscale_suffix" != "" ]] && timeout 1 getent hosts "$host"."$tailscale_suffix" 1>&2; then
-        echo -n "$host"."$tailscale_suffix"
-    elif timeout 1 getent hosts "$host".local 1>&2; then
-        echo -n "$host".local
-    elif timeout 1 getent hosts "$host" 1>&2; then
-        echo -n "$host"
-    else
-        if [[ "$host" == "porkflaps" ]]; then
-            if readlink /etc/localtime | rg -q "Johann"; then
-                echo -n "10.9.0.8"
-            else
-                echo -n "10.8.0.8"
-            fi
+    timeout .2 ping -c 1 "${host}" &>/dev/null && echo -n "${host}" && return 0
+
+    if [[ "$host" == "porkflaps" ]]; then
+        if readlink /etc/localtime | rg -q "Johann" &>/dev/null; then
+            echo -n "10.9.0.8"
+        else
+            echo -n "10.8.0.8"
         fi
+    else
+        echo -n "$host"
     fi
 }
 
@@ -370,7 +382,7 @@ meee() {
 }
 
 sp() {
-    ssh -t "$(get_host porkflaps)" "$@"
+    ssh -tq "$(get_host porkflaps)" "$@"
 }
 
 spcp() {
@@ -378,11 +390,16 @@ spcp() {
 }
 
 sz() {
-    ssh -t "$(get_host zoomacroom)" "$@"
+    ssh -tq "$(get_host zoomacroom)" "$@"
 }
 
 szcp() {
     scp "$(get_host zoomacroom)":"$1" "$2"
+}
+
+ml() {
+   sp 'DISPLAY=:0 xset dpms force on'
+   moonlight stream porkflaps "From Zoomacroom" --quit-after
 }
 
 dtlocal() {
@@ -434,4 +451,10 @@ new_aws() {
 forex() {
     input="$(echo "$*" | tr '[:lower:]' '[:upper:]')"
     units --terse -o '%.2f' "$input" "USD"
+}
+
+te() {
+    pushd ~/t-engine4-linux64-1.7.6 &&
+    ./t-engine -Mshit_gobblin -utest -n
+    popd
 }

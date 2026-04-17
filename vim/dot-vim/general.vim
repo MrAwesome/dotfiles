@@ -181,8 +181,8 @@ map N Nzz
 map n nzz
 
 " Make tabs show up red
-syn match tab display "\t"
-hi link tab Error
+"syn match tab display "\t"
+"hi link tab Error
 
 "sacrilege?
 " nnoremap : ;
