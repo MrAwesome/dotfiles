@@ -9,6 +9,7 @@ if command -v nvim &> /dev/null; then
 else
     export EDITOR="vim"
 fi
+export LESS='-R --mouse --wheel-lines=3'
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile

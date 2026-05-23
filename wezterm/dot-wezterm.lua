@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 local dark_scheme = 'Kasugano (terminal.sexy)'
 local lite_scheme = 'dawnfox'
 
-local desired_scheme = dark_scheme -- automated
+local desired_scheme = lite_scheme -- automated
 config.color_scheme = desired_scheme
 -- config.color_scheme = 'dawnfox'
 -- config.color_scheme = 'Dark Ocean (terminal.sexy)'
@@ -15,6 +15,7 @@ config.color_scheme = desired_scheme
 
 config.hide_tab_bar_if_only_one_tab = true
 config.window_close_confirmation = "NeverPrompt"
+config.warn_about_missing_glyphs = false
 
 wezterm.on('toggle-colorscheme', function(window, pane)
     local new_desired_scheme = "lite_scheme"

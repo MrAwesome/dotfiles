@@ -1,4 +1,5 @@
 inoremap jk <ESC>
+nnoremap <F10> :if exists('g:colors_name') && g:colors_name ==# 'dayfox' \| colorscheme nightfox \| else \| colorscheme dayfox \| endif<CR>:echo<CR>
 " nmap <Leader>m :make check --all-targets<CR><CR><CR>
 
 "nmap <Leader>M :!reset && cargo test<CR>

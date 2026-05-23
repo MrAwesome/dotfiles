@@ -39,14 +39,15 @@ echo "${HOME}/.config/nvim/init.vim ->
     ${thisdir}/config/nvim/init.vim"
 echo
 
+# This file needs to be written to directly, so we don't have it as a symlink
+cp wezterm/dot-wezterm.lua ~/.wezterm.lua
 
 # Unfortunately, --dotfiles is broken for directories with stow, so do this by hand until you find a suitable replacement
 for filename_local in vim/* \
     xinitrc/* \
     Xdefaults/* \
     zsh/* \
-    shell_aliases/* \
-    wezterm/*
+    shell_aliases/*
 do
     echo "[$filename_local]"
 

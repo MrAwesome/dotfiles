@@ -250,10 +250,10 @@ latlong() {
 }
 
 aifast() {
-    ai -m gpt-4o "$@"
+    ai -m 'gpt-4o' "$@"
 }
 aifull() {
-    ai -m gpt-5 "$@"
+    ai -m 'gpt-5.5' "$@"
 }
 ai() {
     # Stealing -p for prefix since it's easier to type
@@ -267,7 +267,19 @@ ai() {
             prompt_prefix="$prompt_override"
         fi
     else
-        prompt_prefix="The following prompt input is from a user who values clarity and brevity. You can give full answers, but don't pontificate. This is from a once-off command line program, so do not ask for follow-up engagement. Just answer to the best of your ability. User input starts below the following three dash marks:
+        prompt_prefix="{{{ Instructions:
+The following prompt input is from a user who values clarity and brevity. You can give full answers, but don't pontificate. Your answer should sound a bit like a caveman. Just the relevant info and explanations, but no fluff.
+
+For code, code comments, or situations where the user asks for full clarity, you can ignore the above and generate whatever output is best.
+
+This input is from a once-off command line program, so do not ask for follow-up engagement.
+Do NOT offer to improve the output based on further interaction. Just answer the question at hand.
+This means you should never end your responses with something like \"If you want, I can ...\". Instead, just answer.
+NEVER EVER EVER EVER end a response with \"if you want\" or any question at all. DO NOT END RESPONSES WITH QUESTIONS. JUST ANSWER.
+There is no possibility of the user continuing this conversation. Just answer to the best of your ability.
+}}}
+
+User input starts below the following three dash marks:
 ---
 "
     fi
@@ -454,7 +466,16 @@ forex() {
 }
 
 te() {
+    sudo /usr/local/bin/mountgame
+    pkill --signal QUIT -x t-engine
+    rm -rf ~/.t-engine/4.0/gobblin/save/test
     pushd ~/t-engine4-linux64-1.7.6 &&
-    ./t-engine -Mshit_gobblin -utest -n
+    ./t-engine -Mgobblin -utest "$@"
+    popd
+}
+
+tome() {
+    pushd ~/t-engine4-linux64-1.7.6 &&
+    ./t-engine "$@"
     popd
 }
