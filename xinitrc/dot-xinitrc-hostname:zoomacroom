@@ -3,6 +3,7 @@
 xrandr --dpi 192
 xrdb -merge ~/.Xdefaults
 xrdb -merge ~/.Xresources
+source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 ~/bin/autorotate_screen.sh &
 
 ydotoold &
@@ -17,6 +18,9 @@ parcellite &
 
 # eval $(gnome-keyring-daemon --start)
 # export SSH_AUTH_SOCK
+
+
+unclutter --idle 0 --root --hide-on-touch &
 
 fc-cache -fv &
 
