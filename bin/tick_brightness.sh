@@ -19,7 +19,12 @@ case "$command" in
     max)
         brightnessctl s 100%;;
     up)
-        brightnessctl s +"$percent_increment"%;;
+        if [ "$percent" -lt 1 ]; then
+            brightnessctl s 1%
+        else
+            brightnessctl s +"$percent_increment"%
+        fi
+        ;;
     down)
         if [ "$percent" -le "$((percent_increment*2))" ]; then
             # Go down by percent_increment, then 
