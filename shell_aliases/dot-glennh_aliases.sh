@@ -479,3 +479,10 @@ tome() {
     ./t-engine "$@"
     popd
 }
+
+noop() {
+    rm -rf /tmp/noop
+    mkdir -p /tmp/noop
+    cd /tmp/noop
+    opencode
+}
